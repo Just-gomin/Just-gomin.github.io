@@ -21,20 +21,21 @@ Just-gomin의 블로그 프로젝트에 대한 계획 문서.
 
 ## 📌 기술 스택
 
-| 역할 | 패키지 | 비고 |
-| :--- | :--- | :--- |
-| Framework | `Next.js 16` (App Router) | Turbopack 기본 번들러, React 19.2 |
-| Language | `TypeScript` | |
-| Package Manager | `pnpm` | |
-| Styling | `Tailwind CSS` | |
-| MDX | `@next/mdx` | `.mdx` → React 컴포넌트 직접 import |
-| 메타데이터 | 포스트별 `.json` 파일 | 의존성 최소화 및 파싱 과정 생략 목적 |
-| 문법 하이라이팅 | `shiki` | |
-| 날짜 처리 | `date-fns` | |
-| 댓글 | `giscus` | 7단계 이후 추가 |
-| Linting | `ESLint` + `Prettier` | |
-| Git hook | `husky` + `lint-staged` | |
-| 배포 | `GitHub Actions` → `gh-pages` | |
+| 역할            | 패키지                        | 비고                                 |
+| :-------------- | :---------------------------- | :----------------------------------- |
+| Framework       | `Next.js 16` (App Router)     | Turbopack 기본 번들러, React 19.2    |
+| Language        | `TypeScript`                  |                                      |
+| Package Manager | `pnpm`                        |                                      |
+| Styling         | `Tailwind CSS`                |                                      |
+| MDX             | `@next/mdx`                   | `.mdx` → React 컴포넌트 직접 import  |
+| 메타데이터      | 포스트별 `.json` 파일         | 의존성 최소화 및 파싱 과정 생략 목적 |
+| 문법 하이라이팅 | `shiki`                       |                                      |
+| 날짜 처리       | `date-fns`                    |                                      |
+| 댓글            | `giscus`                      | 7단계 이후 추가                      |
+| Linting         | `ESLint` + `Prettier`         |                                      |
+| Git hook        | `husky` + `lint-staged`       |                                      |
+| 테스트          | `Jest`                        | 7단계 이후 추가                      |
+| 배포            | `GitHub Actions` → `gh-pages` |                                      |
 
 ## 📌 프로젝트 구조
 
@@ -168,14 +169,28 @@ Just-gomin.github.io/
 
 ### 7단계 — 심화 (이후 지속)
 
-| 기능 | 패키지 |
-| :--- | :--- |
-| 다크모드 | `next-themes` |
-| 포스트 태그 필터링 | 순수 구현 |
-| 댓글 | `giscus` |
-| RSS 피드 | `feed` |
+| 기능               | 패키지                  |
+| :----------------- | :---------------------- |
+| 다크모드           | `next-themes`           |
+| 포스트 태그 필터링 | 순수 구현               |
+| 댓글               | `giscus`                |
+| RSS 피드           | `feed`                  |
 | OG Image 자동 생성 | `@vercel/og` + `satori` |
-| View Transitions | React 19.2 내장 |
+| View Transitions   | React 19.2 내장         |
+| 유닛 테스트        | `Jest`                  |
+
+**테스트 대상:**
+
+- `lib/posts.ts` 유틸 함수 — 포스트 목록 조회, 날짜 정렬, slug 파싱 등 순수 로직
+- `types/index.ts` 타입 검증 — `PostMeta`, `Post` 인터페이스 구조 확인
+
+**설치 및 설정:**
+
+```bash
+pnpm add -D jest jest-environment-jsdom @types/jest ts-jest
+```
+
+`package.json` scripts에 `"test": "jest"` 추가 후 `pnpm test`로 실행
 
 ## 📌 초기 세팅
 
