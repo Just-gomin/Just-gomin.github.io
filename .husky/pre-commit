@@ -1,0 +1,2 @@
+# Staging에 대해 eslint & prettier 수행
+pnpm lint-staged
