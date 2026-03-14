@@ -45,7 +45,7 @@ Just-gomin.github.io/
 │   ├── layout.tsx              # 루트 레이아웃 (폰트, 전역 메타데이터, 네비게이션)
 │   ├── page.tsx                # 홈 페이지
 │   ├── posts/
-│   │   ├── page.tsx            # 포스트 목록 (Feed)
+│   │   ├── page.tsx            # 포스트 목록 (Postings)
 │   │   └── [slug]/
 │   │       └── page.tsx        # 포스트 상세 (generateMetadata + JSON-LD)
 │   ├── resume/
@@ -76,10 +76,16 @@ Just-gomin.github.io/
 
 ### 1단계 — 뼈대 세우기
 
+### ✅ 완료 상태
+
+- 완료 일시: 2026-03-14
+- 브랜치: feat/blog-base-setting
+- 커밋: 7276fbf
+
 **구현 범위:**
 
 - 홈 페이지 (`/`)
-- 네비게이션 (Resume / Feeds)
+- 네비게이션 (Resume / POSTINGS)
 - 기본 레이아웃 (최대 너비, 여백, 폰트)
 - 루트 `layout.tsx`에 전역 Metadata 설정
 
@@ -129,7 +135,7 @@ Just-gomin.github.io/
 - 폰트 시스템: 모노스페이스 폰트 적용 (body 전체 포함)
 - 색상: 오프화이트 배경 + 모노크롬 텍스트
 - 2단 레이아웃: 좌측 콘텐츠 영역 + 우측 고정 사이드바
-- 사이드바: 상단 네비게이션 (Resume / Feeds) + 하단 저자 정보 (이름, 이메일)
+- 사이드바: 상단 네비게이션 (Resume / Postings) + 하단 저자 정보 (이름, 이메일)
 - 홈 페이지: `>` chevron 프리픽스 + 굵기+밑줄 강조 텍스트 스타일
 - `mdx-components.tsx`: 테마에 맞는 마크다운 요소 스타일링 (h1~h3, p, code, a, ul/li)
 
@@ -209,6 +215,12 @@ pnpm dlx husky init
 # .nojekyll 파일 생성 (GitHub Pages용)
 touch public/.nojekyll
 ```
+
+## 📌 변경 이력
+
+|    날짜    | 버전 | 변경 내용                     |
+| :--------: | :--: | :---------------------------- |
+| 2026-03-14 | 1.1  | 1단계 (뼈대 세우기) 완료 반영 |
 
 ## 📌 참고
 
