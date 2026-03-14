@@ -7,13 +7,15 @@
 목록의 제목과 내용을 연속된 줄에 작성하지 않습니다.
 
 ```markdown
-
 <!-- BAD -->
-**TITLE**
+
+### TITLE
+
 - CONTENT
 
 <!-- GOOD -->
-**TITLE**
+
+### TITLE
 
 - CONTENT
 ```
@@ -22,23 +24,51 @@
 
 적절한 언어가 없다면 기본으로 `text` codeblock으로 작성합니다.
 
-```markdown
-
+````markdown
   <!-- BAD -->
-  \```
-
-    ...
-
-  \```
-
-  <!-- GOOD -->
-  \```text
-
-    ...
-
-  \```
 
 ```
+
+    ...
+
+```
+
+  <!-- GOOD -->
+
+```text
+
+    ...
+
+```
+````
+
+### Header는 Header Syntax를 사용할 것
+
+- Emphasis(\*\*)를 Header로 사용하는 경우가 더러 있는데, Header는 Header Syntax(`#`)를 사용합니다.
+- `#` 은 파일의 전체 제목으로 파일에서 유일무이 해야합니다.
+- `##` ~ `######`까지를 헤더로 사용합니다.
+
+```markdown
+<!-- BAD -->
+
+** header **
+
+-
+-
+-
+
+<!-- GOOD -->
+
+### header
+
+-
+-
+-
+```
+
+#### 예외
+
+- Emphasis(\*\*)을 헤더로 허용하는 경우는, Header6(`######`) 까지 사용한 뒤 세부 내용이 필요한 경우에 한합니다.
 
 ## Work Myself
 

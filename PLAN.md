@@ -82,40 +82,86 @@ Just-gomin.github.io/
 - 브랜치: feat/blog-base-setting
 - 커밋: 7276fbf
 
-**구현 범위:**
+#### 구현 범위
 
 - 홈 페이지 (`/`)
 - 네비게이션 (Resume / POSTINGS)
 - 기본 레이아웃 (최대 너비, 여백, 폰트)
 - 루트 `layout.tsx`에 전역 Metadata 설정
 
-**체크포인트:** `pnpm dev`로 로컬에서 홈 화면이 보이면 완료
+#### 체크포인트
+
+`pnpm dev`로 로컬에서 홈 화면이 보이면 완료
 
 ---
 
 ### 2단계 — 배포 파이프라인
 
-**구현 범위:**
+#### 구현 범위
 
-- `next.config.ts`에 아래 설정 추가:
-  - `output: 'export'` — 정적 사이트 빌드
-  - `images: { unoptimized: true }` — `output: 'export'` 필수 설정
-  - `basePath: ''` — `Just-gomin.github.io` (username.github.io 형식)는 서브패스 불필요
-  - `trailingSlash: true` — GitHub Pages 라우팅 호환성
-- `.github/workflows/deploy.yml` 작성
-- `public/.nojekyll` 파일 추가
-- GitHub Pages 배포 확인
+##### `next.config.ts` 설정 추가
 
-**체크포인트:**
+- `output: 'export'` — 정적 사이트 빌드
+- `images: { unoptimized: true }` — `output: 'export'` 필수 설정
+- `basePath: ''` — `Just-gomin.github.io` (username.github.io 형식)는 서브패스 불필요
+- `trailingSlash: true` — GitHub Pages 라우팅 호환성
+
+##### GitHub 설정
+
+- Repository → Settings → Pages → Source: `GitHub Actions` 으로 변경
+- Repository → Settings → Secrets → `ANTHROPIC_API_KEY` 추가 (Claude 리뷰용)
+
+##### 워크플로우 파일 구성 (`.github/workflows/`)
+
+총 3개의 워크플로우를 작성합니다.
+
+- `ci.yml` — PR 생성/업데이트 시 실행 (대상: `main`)
+
+  ```text
+  트리거: pull_request → main
+  단계:
+    1. pnpm 설치 및 의존성 캐싱
+    2. pnpm install
+    3. pnpm lint
+    4. pnpm build  ← out/ 생성 여부로 빌드 성공 검증
+  ```
+
+- `deploy.yml` — `main` 브랜치 푸시 시 실행
+
+  ```text
+  트리거: push → main
+  권한: contents: read, pages: write, id-token: write
+  단계:
+    1. pnpm 설치 및 의존성 캐싱
+    2. pnpm install
+    3. pnpm build  ← out/ 디렉터리 생성
+    4. actions/upload-pages-artifact  ← out/ 업로드
+    5. actions/deploy-pages           ← GitHub Pages 배포
+  ```
+
+- `claude-review.yml` — PR 생성 또는 코멘트(`@claude` 언급)로 실행
+
+  ```text
+  트리거:
+    - pull_request (opened, synchronize)
+    - issue_comment (created, "@claude" 포함 시)
+  단계:
+    1. anthropics/claude-code-action@beta
+       - ANTHROPIC_API_KEY: secrets.ANTHROPIC_API_KEY
+       - PR diff를 컨텍스트로 코드 리뷰 코멘트 작성
+  ```
+
+#### 체크포인트
 
 - `pnpm build` 후 `out/` 디렉터리 생성 확인 (로컬에서 정적 빌드 검증)
 - `main` 푸시 후 GitHub Pages URL에서 블로그가 열리면 완료
+- PR 생성 시 Claude 리뷰 코멘트가 자동으로 달리면 완료
 
 ---
 
 ### 3단계 — MDX 블로그 핵심
 
-**구현 범위:**
+#### 구현 범위
 
 - 타입 정의 (`types/index.ts`): `PostMeta { title, date, description, tags }`, `Post extends PostMeta { slug }`
 - 포스트 목록 페이지 (`/posts`) — 날짜순 정렬
@@ -124,13 +170,13 @@ Just-gomin.github.io/
 - `generateStaticParams`로 정적 경로 생성
 - `shiki`로 코드 블록 문법 하이라이팅
 
-**체크포인트:** MDX 파일 하나를 작성했을 때 상세 페이지가 렌더링되면 완료
+#### 체크포인트 MDX 파일 하나를 작성했을 때 상세 페이지가 렌더링되면 완료
 
 ---
 
 ### 4단계 — 테마 구현
 
-**구현 범위:**
+#### 구현 범위
 
 - 폰트 시스템: 모노스페이스 폰트 적용 (body 전체 포함)
 - 색상: 오프화이트 배경 + 모노크롬 텍스트
@@ -139,13 +185,13 @@ Just-gomin.github.io/
 - 홈 페이지: `>` chevron 프리픽스 + 굵기+밑줄 강조 텍스트 스타일
 - `mdx-components.tsx`: 테마에 맞는 마크다운 요소 스타일링 (h1~h3, p, code, a, ul/li)
 
-**체크포인트:** zerolog 레퍼런스와 시각적으로 일치하는 홈 화면이 렌더링되면 완료
+#### 체크포인트 zerolog 레퍼런스와 시각적으로 일치하는 홈 화면이 렌더링되면 완료
 
 ---
 
 ### 5단계 — SEO 최적화
 
-**구현 범위:**
+#### 구현 범위
 
 - `generateMetadata`로 포스트별 동적 메타데이터 생성
 - JSON-LD 구조화 데이터 (`BlogPosting` 스키마)
@@ -153,7 +199,7 @@ Just-gomin.github.io/
 - `robots.ts` — 크롤러 접근 제어
 - Open Graph / Twitter Card 메타태그
 
-**체크포인트:**
+#### 체크포인트
 
 - `/posts/[slug]`의 `<head>`에 OG 메타태그 포함
 - `pnpm build` 후 `out/sitemap.xml`, `out/robots.txt` 생성
@@ -163,13 +209,13 @@ Just-gomin.github.io/
 
 ### 6단계 — Resume 페이지
 
-**구현 범위:**
+#### 구현 범위
 
 - Resume 페이지 (`/resume`) — 경력, 프로젝트, 학력, 기술 스택
 - 정적 Metadata 설정
 - JSON-LD `ProfilePage` 스키마
 
-**체크포인트:** `/resume` 접속 시 이력서 내용이 렌더링되면 완료
+#### 체크포인트 `/resume` 접속 시 이력서 내용이 렌더링되면 완료
 
 ---
 
@@ -185,12 +231,12 @@ Just-gomin.github.io/
 | View Transitions   | React 19.2 내장         |
 | 유닛 테스트        | `Jest`                  |
 
-**테스트 대상:**
+#### 테스트 대상
 
 - `lib/posts.ts` 유틸 함수 — 포스트 목록 조회, 날짜 정렬, slug 파싱 등 순수 로직
 - `types/index.ts` 타입 검증 — `PostMeta`, `Post` 인터페이스 구조 확인
 
-**설치 및 설정:**
+#### 설치 및 설정
 
 ```bash
 pnpm add -D jest jest-environment-jsdom @types/jest ts-jest
