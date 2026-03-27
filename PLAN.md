@@ -97,6 +97,12 @@ Just-gomin.github.io/
 
 ### 2단계 — 배포 파이프라인
 
+### ✅ 완료 상태
+
+- 완료 일시: 2026-03-27
+- 브랜치: feat/deploy-pipeline
+- 커밋: ed47eb2
+
 #### 구현 범위
 
 ##### `next.config.ts` 설정 추가
@@ -109,7 +115,7 @@ Just-gomin.github.io/
 ##### GitHub 설정
 
 - Repository → Settings → Pages → Source: `GitHub Actions` 으로 변경
-- Repository → Settings → Secrets → `ANTHROPIC_API_KEY` 추가 (Claude 리뷰용)
+- Repository → Settings → Secrets → `CLAUDE_CODE_OAUTH_TOKEN` 추가 (Claude 리뷰용)
 
 ##### 워크플로우 파일 구성 (`.github/workflows/`)
 
@@ -264,9 +270,10 @@ touch public/.nojekyll
 
 ## 📌 변경 이력
 
-|    날짜    | 버전 | 변경 내용                     |
-| :--------: | :--: | :---------------------------- |
-| 2026-03-14 | 1.1  | 1단계 (뼈대 세우기) 완료 반영 |
+|    날짜    | 버전 |             변경 내용             |
+| :--------: | :--: | :-------------------------------: |
+| 2026-03-14 | 1.1  |   1단계 (뼈대 세우기) 완료 반영   |
+| 2026-03-27 | 1.2  | 2단계 (배포 파이프라인) 완료 반영 |
 
 ## 📌 참고
 
