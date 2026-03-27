@@ -12,8 +12,8 @@ jobs:
   claude-review:
     if: |
       (github.event_name == 'pull_request' && github.event.action == 'opened') ||
-      (github.event_name == 'pull_request_review' && github.event.review.body == '@claude review') ||
-      (github.event_name == 'pull_request_review_comment' && github.event.comment.body == '@claude review')
+      (github.event_name == 'pull_request_review' && github.event.review.body == 'claude-review') ||
+      (github.event_name == 'pull_request_review_comment' && github.event.comment.body == 'claude-review')
 
     runs-on: ubuntu-latest
     permissions:
