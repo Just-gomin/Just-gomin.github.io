@@ -1,4 +1,4 @@
-import { BLOG_DESCRIPTION, BLOG_TITLE } from "@/lib/constants";
+import { BLOG_DESCRIPTION, BLOG_TITLE } from "@/features/common";
 import Link from "next/link";
 
 export default function Home() {
@@ -8,7 +8,7 @@ export default function Home() {
       <p>{BLOG_DESCRIPTION}</p>
       <Link href={"/resume"}>RESUME</Link>
       <br></br>
-      <Link href={"/postings"}>POSTINGS</Link>
+      <Link href={"/posts"}>POSTS</Link>
     </div>
   );
 }
