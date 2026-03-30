@@ -178,6 +178,12 @@ Just-gomin.github.io/
 
 ### 3단계 — MDX 블로그 핵심
 
+### ✅ 완료 상태
+
+- 완료 일시: 2026-03-31
+- 브랜치: feat/post
+- 커밋: f07fea7
+
 #### 구현 범위
 
 - 타입 정의 (`features/post/types.ts`): `PostMeta { title, date, description, tags }`, `Post extends PostMeta { slug }`
@@ -285,6 +291,7 @@ touch public/.nojekyll
 | :--------: | :--: | :-------------------------------: |
 | 2026-03-14 | 1.1  |   1단계 (뼈대 세우기) 완료 반영   |
 | 2026-03-27 | 1.2  | 2단계 (배포 파이프라인) 완료 반영 |
+| 2026-03-31 | 1.3  | 3단계 (MDX 블로그 핵심) 완료 반영 |
 
 ## 📌 참고
 
