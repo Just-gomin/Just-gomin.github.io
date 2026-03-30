@@ -294,5 +294,6 @@ touch public/.nojekyll
 - [Next.js Metadata API](https://nextjs.org/docs/app/getting-started/metadata-and-og-images)
 - [Next.js JSON-LD 가이드](https://nextjs.org/docs/app/guides/json-ld)
 - [Next.js blog-starter 예제](https://github.com/vercel/next.js/tree/canary/examples/blog-starter)
+- [Next.js MDX 사용 가이드](https://nextjs.org/docs/app/guides/mdx)
 - [Tailwind CSS 공식 문서](https://tailwindcss.com/docs)
 - [shiki 공식 문서](https://shiki.style)
