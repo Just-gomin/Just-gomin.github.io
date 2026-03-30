@@ -41,31 +41,37 @@ Just-gomin의 블로그 프로젝트에 대한 계획 문서.
 
 ```text
 Just-gomin.github.io/
-├── app/
-│   ├── layout.tsx              # 루트 레이아웃 (폰트, 전역 메타데이터, 네비게이션)
-│   ├── page.tsx                # 홈 페이지
+├── app/                          # 라우팅 진입점만 (thin shell)
+│   ├── layout.tsx                # 루트 레이아웃 (폰트, 전역 메타데이터, 네비게이션)
+│   ├── page.tsx                  # 홈 페이지
+│   ├── globals.css
 │   ├── posts/
-│   │   ├── page.tsx            # 포스트 목록 (Postings)
+│   │   ├── page.tsx              # 포스트 목록
 │   │   └── [slug]/
-│   │       └── page.tsx        # 포스트 상세 (generateMetadata + JSON-LD)
+│   │       └── page.tsx          # 포스트 상세 (generateMetadata + JSON-LD)
 │   ├── resume/
-│   │   └── page.tsx            # 이력서 페이지
-│   ├── sitemap.ts              # 동적 사이트맵 생성
-│   └── robots.ts               # robots.txt 생성
+│   │   └── page.tsx              # 이력서 페이지
+│   ├── sitemap.ts                # 동적 사이트맵 생성
+│   └── robots.ts                 # robots.txt 생성
+├── features/                     # 도메인별 모듈
+│   ├── common/
+│   │   ├── constants.ts          # BLOG_TITLE, BLOG_DESCRIPTION
+│   │   └── index.ts              # barrel export
+│   ├── post/
+│   │   ├── types.ts              # PostMeta, Post 인터페이스
+│   │   ├── lib/
+│   │   │   └── posts.ts          # MDX 파싱 유틸 함수
+│   │   └── index.ts              # barrel export
+│   └── resume/
+│       └── index.ts              # barrel export
 ├── content/
 │   └── posts/
 │       └── POSTING_TITLE/
-│           ├── index.mdx       # 포스트 본문
-│           └── meta.json       # 메타데이터 (title, date, description, tags)
-├── types/
-│   └── index.ts                # PostMeta, Post 인터페이스
-├── lib/
-│   └── posts.ts                # MDX 파싱 유틸 함수
-├── styles/
-│   └── globals.css
+│           ├── index.mdx         # 포스트 본문
+│           └── meta.json         # 메타데이터 (title, date, description, tags)
 ├── public/
-│   └── .nojekyll               # GitHub Pages Jekyll 비활성화
-├── mdx-components.tsx          # MDX 커스텀 컴포넌트 정의
+│   └── .nojekyll                 # GitHub Pages Jekyll 비활성화
+├── mdx-components.tsx            # MDX 커스텀 컴포넌트 정의
 ├── next.config.ts
 ├── tailwind.config.ts
 ├── tsconfig.json
@@ -169,7 +175,7 @@ Just-gomin.github.io/
 
 #### 구현 범위
 
-- 타입 정의 (`types/index.ts`): `PostMeta { title, date, description, tags }`, `Post extends PostMeta { slug }`
+- 타입 정의 (`features/post/types.ts`): `PostMeta { title, date, description, tags }`, `Post extends PostMeta { slug }`
 - 포스트 목록 페이지 (`/posts`) — 날짜순 정렬
 - 포스트 상세 페이지 (`/posts/[slug]`)
 - 메타데이터 관리: `content/posts/[slug]/meta.json` (title, date, description, tags)
@@ -239,8 +245,8 @@ Just-gomin.github.io/
 
 #### 테스트 대상
 
-- `lib/posts.ts` 유틸 함수 — 포스트 목록 조회, 날짜 정렬, slug 파싱 등 순수 로직
-- `types/index.ts` 타입 검증 — `PostMeta`, `Post` 인터페이스 구조 확인
+- `features/post/lib/posts.ts` 유틸 함수 — 포스트 목록 조회, 날짜 정렬, slug 파싱 등 순수 로직
+- `features/post/types.ts` 타입 검증 — `PostMeta`, `Post` 인터페이스 구조 확인
 
 #### 설치 및 설정
 
