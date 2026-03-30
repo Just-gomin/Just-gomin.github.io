@@ -58,9 +58,11 @@ Just-gomin.github.io/
 │   │   ├── constants.ts          # BLOG_TITLE, BLOG_DESCRIPTION
 │   │   └── index.ts              # barrel export
 │   ├── post/
-│   │   ├── types.ts              # PostMeta, Post 인터페이스
+│   │   ├── components            # React Components
+│   │   │   └── index.ts          # barrel export
 │   │   ├── lib/
 │   │   │   └── posts.ts          # MDX 파싱 유틸 함수
+│   │   ├── types.ts              # PostMeta, Post 인터페이스
 │   │   └── index.ts              # barrel export
 │   └── resume/
 │       └── index.ts              # barrel export
