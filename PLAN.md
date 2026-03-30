@@ -72,6 +72,9 @@ Just-gomin.github.io/
 │           ├── index.mdx         # 포스트 본문
 │           └── meta.json         # 메타데이터 (title, date, description, tags)
 ├── public/
+│   ├── posts/
+│   │   └── POSTING_TITLE/
+│   │       └── images/           # 포스트에 사용되는 이미지 (MDX에서 /posts/POSTING_TITLE/images/photo.png 으로 참조)
 │   └── .nojekyll                 # GitHub Pages Jekyll 비활성화
 ├── mdx-components.tsx            # MDX 커스텀 컴포넌트 정의
 ├── next.config.ts
