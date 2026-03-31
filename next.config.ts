@@ -8,7 +8,7 @@ const nextConfig: NextConfig = {
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
 };
 
-// Configuration for Next.js with MarkDownX
+// Configuration for Next.js with MDX
 // REF: https://nextjs.org/docs/app/guides/mdx#configure-nextconfigmjs
 const withMDX = createMDX({
   extension: /\.(md|mdx)$/,
