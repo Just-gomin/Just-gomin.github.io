@@ -37,6 +37,14 @@ function getPostMeta(slug: string): PostMeta {
   const metaFile = readFileSync(slugPath, { encoding: "utf-8" });
   const metaData: PostMeta = JSON.parse(metaFile);
 
+  try {
+    Date.parse(metaData.date);
+  } catch (e) {
+    console.error(
+      `Post's date is not enable to parse. slug: ${slug}, date: ${metaData.date}`,
+    );
+  }
+
   return metaData;
 }
 
