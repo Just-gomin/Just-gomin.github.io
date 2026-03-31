@@ -17,7 +17,13 @@ export async function generateMetadata({ params }: Props) {
 
 export default async function Page({ params }: Props) {
   const { slug } = await params;
-  const { default: Post } = await import(`@/content/posts/${slug}/index.mdx`);
+  try {
+    const _ = getPost(slug);
+    const { default: Post } = await import(`@/content/posts/${slug}/index.mdx`);
 
-  return <Post />;
+    return <Post />;
+  } catch (e) {
+    console.error(`Not valid slug. slug: ${slug}, `);
+    throw e;
+  }
 }
