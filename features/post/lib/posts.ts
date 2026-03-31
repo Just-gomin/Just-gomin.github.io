@@ -13,13 +13,9 @@ const POSTS_DIR = join(process.cwd(), "content", "posts");
 function getPostSlugs(): string[] {
   try {
     const direntList = readdirSync(POSTS_DIR, { withFileTypes: true });
-    const slugList: string[] = [];
-
-    for (const dirent of direntList) {
-      if (dirent.isDirectory()) {
-        slugList.push(dirent.name);
-      }
-    }
+    const slugList: string[] = direntList
+      .filter((dirent) => dirent.isDirectory)
+      .map((directory) => directory.name);
 
     return slugList;
   } catch (e) {
@@ -79,18 +75,9 @@ export function getPost(slug: string): Post {
  */
 export function getAllPosts(): Post[] {
   const slugList = getPostSlugs();
-  let postList: Post[] = [];
-  for (const slug of slugList) {
-    try {
-      const post = getPost(slug);
-      postList.push(post);
-    } catch (e) {
-      console.error(`Error occured. slug: ${slug}, error: ${e}`);
-    }
-  }
-  postList = postList.sort((a, b) =>
-    compareDesc(parseISO(a.date), parseISO(b.date)),
-  );
+  const postList: Post[] = slugList
+    .map(getPost)
+    .sort((a, b) => compareDesc(parseISO(a.date), parseISO(b.date)));
 
   return postList;
 }
@@ -102,10 +89,5 @@ export function getAllPosts(): Post[] {
  */
 export function generatePostStaticParams(): { slug: string }[] {
   const slugList = getPostSlugs();
-  const slugObjectList: { slug: string }[] = [];
-  for (const slug of slugList) {
-    slugObjectList.push({ slug });
-  }
-
-  return slugObjectList;
+  return slugList.map((slug) => ({ slug }));
 }
