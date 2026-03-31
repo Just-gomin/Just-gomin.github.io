@@ -81,8 +81,12 @@ export function getAllPosts(): Post[] {
   const slugList = getPostSlugs();
   let postList: Post[] = [];
   for (const slug of slugList) {
-    const post = getPost(slug);
-    postList.push(post);
+    try {
+      const post = getPost(slug);
+      postList.push(post);
+    } catch (e) {
+      console.error(`Error occured. slug: ${slug}, error: ${e}`);
+    }
   }
   postList = postList.sort((a, b) =>
     compareDesc(parseISO(a.date), parseISO(b.date)),
