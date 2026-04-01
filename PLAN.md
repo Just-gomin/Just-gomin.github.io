@@ -72,6 +72,9 @@ Just-gomin.github.io/
 │           ├── index.mdx         # 포스트 본문
 │           └── meta.json         # 메타데이터 (title, date, description, tags)
 ├── public/
+│   ├── posts/
+│   │   └── POSTING_TITLE/
+│   │       └── images/           # 포스트에 사용되는 이미지 (MDX에서 /posts/POSTING_TITLE/images/photo.png 으로 참조)
 │   └── .nojekyll                 # GitHub Pages Jekyll 비활성화
 ├── mdx-components.tsx            # MDX 커스텀 컴포넌트 정의
 ├── next.config.ts
@@ -174,6 +177,12 @@ Just-gomin.github.io/
 ---
 
 ### 3단계 — MDX 블로그 핵심
+
+### ✅ 완료 상태
+
+- 완료 일시: 2026-03-31
+- 브랜치: feat/post
+- 커밋: f07fea7
 
 #### 구현 범위
 
@@ -282,6 +291,7 @@ touch public/.nojekyll
 | :--------: | :--: | :-------------------------------: |
 | 2026-03-14 | 1.1  |   1단계 (뼈대 세우기) 완료 반영   |
 | 2026-03-27 | 1.2  | 2단계 (배포 파이프라인) 완료 반영 |
+| 2026-03-31 | 1.3  | 3단계 (MDX 블로그 핵심) 완료 반영 |
 
 ## 📌 참고
 
@@ -291,5 +301,6 @@ touch public/.nojekyll
 - [Next.js Metadata API](https://nextjs.org/docs/app/getting-started/metadata-and-og-images)
 - [Next.js JSON-LD 가이드](https://nextjs.org/docs/app/guides/json-ld)
 - [Next.js blog-starter 예제](https://github.com/vercel/next.js/tree/canary/examples/blog-starter)
+- [Next.js MDX 사용 가이드](https://nextjs.org/docs/app/guides/mdx)
 - [Tailwind CSS 공식 문서](https://tailwindcss.com/docs)
 - [shiki 공식 문서](https://shiki.style)
