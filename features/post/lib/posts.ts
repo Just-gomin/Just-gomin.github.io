@@ -14,7 +14,7 @@ function getPostSlugs(): string[] {
   try {
     const direntList = readdirSync(POSTS_DIR, { withFileTypes: true });
     const slugList: string[] = direntList
-      .filter((dirent) => dirent.isDirectory)
+      .filter((dirent) => dirent.isDirectory())
       .map((directory) => directory.name);
 
     return slugList;
@@ -37,11 +37,9 @@ function getPostMeta(slug: string): PostMeta {
   const metaFile = readFileSync(slugPath, { encoding: "utf-8" });
   const metaData: PostMeta = JSON.parse(metaFile);
 
-  try {
-    Date.parse(metaData.date);
-  } catch (e) {
+  if (isNaN(Date.parse(metaData.date))) {
     console.error(
-      `Post's date is not enable to parse. slug: ${slug}, date: ${metaData.date}`,
+      `Post's date is not valid. slug: ${slug}, date: ${metaData.date}`,
     );
   }
 
