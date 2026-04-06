@@ -201,14 +201,54 @@ Just-gomin.github.io/
 
 #### 구현 범위
 
-- 폰트 시스템: 모노스페이스 폰트 적용 (body 전체 포함)
-- 색상: 오프화이트 배경 + 모노크롬 텍스트
-- 2단 레이아웃: 좌측 콘텐츠 영역 + 우측 고정 사이드바
-- 사이드바: 상단 네비게이션 (Resume / Postings) + 하단 저자 정보 (이름, 이메일)
-- 홈 페이지: `>` chevron 프리픽스 + 굵기+밑줄 강조 텍스트 스타일
-- `mdx-components.tsx`: 테마에 맞는 마크다운 요소 스타일링 (h1~h3, p, code, a, ul/li)
+##### 폰트 시스템
 
-#### 체크포인트 zerolog 레퍼런스와 시각적으로 일치하는 홈 화면이 렌더링되면 완료
+- Google Fonts에서 `NanumGothicCoding` 로드 (`next/font/google`)
+- CSS variable `--font-nanum-gothic-coding` 등록
+- body 전체에 단일 폰트 적용 (heading, 본문, 코드 블록 포함)
+
+##### 색상 시스템
+
+- `globals.css` CSS 변수 업데이트
+  - `--background`: `#FAF5EE` (크림 화이트)
+  - `--foreground`: `#7C7365` (웜 브라운)
+- 다크모드 제거 (7단계에서 `next-themes`로 추가 예정)
+
+##### 2단 레이아웃 (`app/layout.tsx`)
+
+- 전체 wrapper: `flex min-h-screen`
+- 좌측 콘텐츠 영역: `flex-1 p-12` (스크롤 가능)
+- 우측 사이드바: 고정 너비, `sticky top-0 h-screen`, 좌측 경계선
+
+##### 사이드바
+
+- `features/common/components/Sidebar.tsx` 로 분리
+- 상단 네비게이션: RESUME / POSTS (대문자, 세로 배치, `next/link`)
+  - PROJECTS는 4단계 범위 제외 (이후 단계에서 추가)
+- 하단 저자 정보: Just-gomin (이름) + Contact(<just0gomin@gmail.com>) (이메일)
+- `flex flex-col justify-between h-full` 로 상하 분배
+
+##### 홈 페이지 (`app/page.tsx`)
+
+- 큰 텍스트 블록 3개 (각 블록 사이 충분한 여백)
+  1. "Done is better than Perfect"
+  2. "Read, write, organize." (trailing `_` 포함)
+  3. "Working on [beyo](링크) as [Product Engineer](링크) now." (underline 링크 스타일)
+- chevron prefix 없음
+
+##### MDX 스타일링 (`mdx-components.tsx`)
+
+- `h1`~`h3`: 크기 계층 및 상하 여백
+- `p`: 본문 행간 (`leading-relaxed`)
+- `code` (인라인): 동일 폰트, 배경색만 미세하게 구분
+- `a`: underline, 테마 색상 유지
+- `ul` / `li`: 들여쓰기, 항목 간 여백
+
+#### 체크포인트
+
+- NanumGothicCoding이 헤더, 본문, 코드 블록 모두에 적용
+- 홈 화면이 목업과 시각적으로 일치 (2단 레이아웃, 사이드바, 텍스트 블록)
+- `/resume`, `/posts` 두 링크 모두 사이드바에서 동작
 
 ---
 
@@ -295,7 +335,8 @@ touch public/.nojekyll
 
 ## 📌 참고
 
-- [zerolog 소스코드](https://github.com/mkitwave/zero-log)
+### Tech 참고
+
 - [Next.js 공식 문서](https://nextjs.org/docs) — App Router, MDX, Static Export
 - [Next.js 16 릴리즈 노트](https://nextjs.org/blog/next-16)
 - [Next.js Metadata API](https://nextjs.org/docs/app/getting-started/metadata-and-og-images)
@@ -304,3 +345,8 @@ touch public/.nojekyll
 - [Next.js MDX 사용 가이드](https://nextjs.org/docs/app/guides/mdx)
 - [Tailwind CSS 공식 문서](https://tailwindcss.com/docs)
 - [shiki 공식 문서](https://shiki.style)
+
+### Design 참고
+
+- [zerolog 소스코드 @github](https://github.com/mkitwave/zero-log)
+- [text-only pages @onepagelove](https://onepagelove.com/tag/text-only/page/4)
