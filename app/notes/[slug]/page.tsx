@@ -1,27 +1,27 @@
-import { generatePostStaticParams, getPost } from "@/features/post";
+import { generateNoteStaticParams, getNote } from "@/features/note";
 
 type Props = {
   params: Promise<{ slug: string }>;
 };
 
-export const generateStaticParams = generatePostStaticParams;
+export const generateStaticParams = generateNoteStaticParams;
 
 export async function generateMetadata({ params }: Props) {
   const { slug } = await params;
-  const post = getPost(slug);
+  const note = getNote(slug);
   return {
-    title: post.title,
-    description: post.description,
+    title: note.title,
+    description: note.description,
   };
 }
 
 export default async function Page({ params }: Props) {
   const { slug } = await params;
   try {
-    const _ = getPost(slug);
-    const { default: Post } = await import(`@/content/posts/${slug}/index.mdx`);
+    const _ = getNote(slug);
+    const { default: Note } = await import(`@/content/notes/${slug}/index.mdx`);
 
-    return <Post />;
+    return <Note />;
   } catch (e) {
     console.error(`Not valid slug. slug: ${slug}, `);
     throw e;
