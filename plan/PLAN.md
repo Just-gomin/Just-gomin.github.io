@@ -45,10 +45,10 @@ Just-gomin.github.io/
 │   ├── layout.tsx                # 루트 레이아웃 (폰트, 전역 메타데이터, 네비게이션)
 │   ├── page.tsx                  # 홈 페이지
 │   ├── globals.css
-│   ├── posts/
-│   │   ├── page.tsx              # 포스트 목록
+│   ├── notes/
+│   │   ├── page.tsx              # 노트 목록
 │   │   └── [slug]/
-│   │       └── page.tsx          # 포스트 상세 (generateMetadata + JSON-LD)
+│   │       └── page.tsx          # 노트 상세 (generateMetadata + JSON-LD)
 │   ├── resume/
 │   │   └── page.tsx              # 이력서 페이지
 │   ├── sitemap.ts                # 동적 사이트맵 생성
@@ -57,24 +57,24 @@ Just-gomin.github.io/
 │   ├── common/
 │   │   ├── constants.ts          # BLOG_TITLE, BLOG_DESCRIPTION
 │   │   └── index.ts              # barrel export
-│   ├── post/
+│   ├── note/
 │   │   ├── components            # React Components
 │   │   │   └── index.ts          # barrel export
 │   │   ├── lib/
-│   │   │   └── posts.ts          # MDX 파싱 유틸 함수
-│   │   ├── types.ts              # PostMeta, Post 인터페이스
+│   │   │   └── notes.ts          # MDX 파싱 유틸 함수
+│   │   ├── types.ts              # NoteMeta, Note 인터페이스
 │   │   └── index.ts              # barrel export
 │   └── resume/
 │       └── index.ts              # barrel export
 ├── content/
-│   └── posts/
+│   └── notes/
 │       └── POSTING_TITLE/
-│           ├── index.mdx         # 포스트 본문
+│           ├── index.mdx         # 노트 본문
 │           └── meta.json         # 메타데이터 (title, date, description, tags)
 ├── public/
-│   ├── posts/
+│   ├── notes/
 │   │   └── POSTING_TITLE/
-│   │       └── images/           # 포스트에 사용되는 이미지 (MDX에서 /posts/POSTING_TITLE/images/photo.png 으로 참조)
+│   │       └── images/           # 노트에 사용되는 이미지 (MDX에서 /notes/POSTING_TITLE/images/photo.png 으로 참조)
 │   └── .nojekyll                 # GitHub Pages Jekyll 비활성화
 ├── mdx-components.tsx            # MDX 커스텀 컴포넌트 정의
 ├── next.config.ts
@@ -186,10 +186,10 @@ Just-gomin.github.io/
 
 #### 구현 범위
 
-- 타입 정의 (`features/post/types.ts`): `PostMeta { title, date, description, tags }`, `Post extends PostMeta { slug }`
-- 포스트 목록 페이지 (`/posts`) — 날짜순 정렬
-- 포스트 상세 페이지 (`/posts/[slug]`)
-- 메타데이터 관리: `content/posts/[slug]/meta.json` (title, date, description, tags)
+- 타입 정의 (`features/note/types.ts`): `NoteMeta { title, date, description, tags }`, `Note extends NoteMeta { slug }`
+- 노트 목록 페이지 (`/notes`) — 날짜순 정렬
+- 노트 상세 페이지 (`/notes/[slug]`)
+- 메타데이터 관리: `content/notes/[slug]/meta.json` (title, date, description, tags)
 - `generateStaticParams`로 정적 경로 생성
 - `shiki`로 코드 블록 문법 하이라이팅
 
@@ -223,7 +223,7 @@ Just-gomin.github.io/
 ##### 사이드바
 
 - `features/common/components/Sidebar.tsx` 로 분리
-- 상단 네비게이션: RESUME / POSTS (대문자, 세로 배치, `next/link`)
+- 상단 네비게이션: RESUME / NOTES (대문자, 세로 배치, `next/link`)
   - PROJECTS는 4단계 범위 제외 (이후 단계에서 추가)
 - 하단 저자 정보: Just-gomin (이름) + Contact(<just0gomin@gmail.com>) (이메일)
 - `flex flex-col justify-between h-full` 로 상하 분배
@@ -248,7 +248,7 @@ Just-gomin.github.io/
 
 - NanumGothicCoding이 헤더, 본문, 코드 블록 모두에 적용
 - 홈 화면이 목업과 시각적으로 일치 (2단 레이아웃, 사이드바, 텍스트 블록)
-- `/resume`, `/posts` 두 링크 모두 사이드바에서 동작
+- `/resume`, `/notes` 두 링크 모두 사이드바에서 동작
 
 ---
 
@@ -264,7 +264,7 @@ Just-gomin.github.io/
 
 #### 체크포인트
 
-- `/posts/[slug]`의 `<head>`에 OG 메타태그 포함
+- `/notes/[slug]`의 `<head>`에 OG 메타태그 포함
 - `pnpm build` 후 `out/sitemap.xml`, `out/robots.txt` 생성
 - Google Rich Results Test에서 JSON-LD 인식
 
@@ -296,8 +296,8 @@ Just-gomin.github.io/
 
 #### 테스트 대상
 
-- `features/post/lib/posts.ts` 유틸 함수 — 포스트 목록 조회, 날짜 정렬, slug 파싱 등 순수 로직
-- `features/post/types.ts` 타입 검증 — `PostMeta`, `Post` 인터페이스 구조 확인
+- `features/note/lib/notes.ts` 유틸 함수 — 노트 목록 조회, 날짜 정렬, slug 파싱 등 순수 로직
+- `features/note/types.ts` 타입 검증 — `NoteMeta`, `Note` 인터페이스 구조 확인
 
 #### 설치 및 설정
 

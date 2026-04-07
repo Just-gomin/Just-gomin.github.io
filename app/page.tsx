@@ -8,7 +8,7 @@ export default function Home() {
       <p>{BLOG_DESCRIPTION}</p>
       <Link href={"/resume"}>RESUME</Link>
       <br></br>
-      <Link href={"/posts"}>POSTS</Link>
+      <Link href={"/notes"}>NOTES</Link>
     </div>
   );
 }
