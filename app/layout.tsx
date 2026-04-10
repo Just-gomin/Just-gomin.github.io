@@ -1,15 +1,12 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Nanum_Gothic_Coding } from "next/font/google";
 import "./globals.css";
 import { BLOG_DESCRIPTION, BLOG_TITLE } from "@/features/common";
+import { Nav } from "@/features/common/components";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const nanumGothicCoding = Nanum_Gothic_Coding({
+  weight: ["400", "700"],
+  variable: "--font-nanum-gothic-coding",
   subsets: ["latin"],
 });
 
@@ -63,9 +60,10 @@ export default function RootLayout({
         <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${nanumGothicCoding.variable} antialiased font-nanum-gothic-coding `}
       >
-        {children}
+        <Nav />
+        <main>{children}</main>
       </body>
     </html>
   );
