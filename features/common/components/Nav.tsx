@@ -2,11 +2,12 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { BLOG_TITLE } from "../constants";
 
 const NAV_LINKS = [
-  { href: "/", label: "/HOME" },
-  { href: "/resume", label: "/RESUME" },
-  { href: "/notes", label: "/NOTES" },
+  { href: "/", label: "HOME" },
+  { href: "/resume", label: "RESUME" },
+  { href: "/notes", label: "NOTES" },
 ] as const;
 
 export function Nav() {
@@ -20,27 +21,30 @@ export function Nav() {
 
   return (
     <nav
-      style={{ padding: "var(--padding-base)" }}
-      className="flex justify-between items-center"
+      style={{
+        height: 48,
+        // paddingLeft: "var(--padding-base)",
+        // paddingRight: "var(--padding-base)",
+      }}
+      className="flex justify-between border-b"
     >
       <div className="flex gap-8">
         {NAV_LINKS.map(({ href, label }) => (
           <Link
             key={href}
             href={href}
-            className={
-              (isActive(href)
-                ? "text-(length:--font-size-heading) font-bold"
-                : "text-(length:--font-size-body)") + "algin-baseline"
-            }
+            className="text-(length:--font-size-subheading) font-bold"
           >
-            {isActive(href) ? label.toUpperCase() : label}
+            {isActive(href) ? "[*]" + label.toUpperCase() : "[ ]" + label}
           </Link>
         ))}
       </div>
-      <span className="text-(length:--font-size-body)">
-        just0gomin@gmail.com
-      </span>
+
+      <div className="flex items-baseline">
+        <div className="text-(length:--font-size-subheading) font-bold">
+          {BLOG_TITLE}
+        </div>
+      </div>
     </nav>
   );
 }

@@ -61,6 +61,7 @@ export default function RootLayout({
       </head>
       <body
         className={`${nanumGothicCoding.variable} antialiased font-nanum-gothic-coding `}
+        style={{ padding: "var(--padding-base)" }}
       >
         <Nav />
         <main>{children}</main>

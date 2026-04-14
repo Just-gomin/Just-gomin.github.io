@@ -3,7 +3,9 @@
 :root {
   --background: #fbfafa;
   --foreground: #7c7365;
+  --border: #7c7365;
   --padding-base: 12px;
+  --margin-base: 12px;
 }
 
 @theme inline {
@@ -16,6 +18,7 @@
   --font-size-heading: 36px;
   --font-size-subheading: 20px;
   --font-size-body: 16px;
+  --font-size-small: 12px;
 }
 
 body {
