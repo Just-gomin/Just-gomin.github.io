@@ -11,7 +11,7 @@ Just-gomin의 블로그 프로젝트에 대한 계획 문서.
 
 ## 📌 블로그 컨셉
 
-- 배경: `#FAF5EE` (크림 화이트), 텍스트: `#354F3B` (딥 그린)
+- 배경: `#FBFAFA` (크림 화이트), 텍스트: `#354F3B` (딥 그린)
 - 폰트: `Nanum Gothic Coding` 전체 적용 (헤더, 본문, 코드 블록 포함)
 - 미니멀 디자인 지향: 장식 없는 타이포그래피 중심, 여백과 계층으로 구조 표현
 
@@ -210,7 +210,7 @@ Just-gomin.github.io/
 ##### 색상 시스템
 
 - `globals.css` CSS 변수 업데이트
-  - `--background`: `#FAF5EE` (크림 화이트)
+  - `--background`: `#FBFAFA` (크림 화이트)
   - `--foreground`: `#7C7365` (웜 브라운)
 - 다크모드 제거 (7단계에서 `next-themes`로 추가 예정)
 
@@ -218,7 +218,8 @@ Just-gomin.github.io/
 
 - 전체 wrapper: `flex min-h-screen`
 - 좌측 콘텐츠 영역: `flex-1 p-12` (스크롤 가능)
-- 우측 사이드바: 고정 너비, `sticky top-0 h-screen`, 좌측 경계선
+- ~~우측 사이드바: 고정 너비, `sticky top-0 h-screen`, 좌측 경계선~~
+  - 상단 네비게이션으로 변경
 
 ##### 사이드바
 
