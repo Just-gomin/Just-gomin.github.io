@@ -163,7 +163,7 @@ Figma 레이아웃 측정값:
 
 #### FILTER 사이드바
 
-- [ ] 왼쪽 사이드바: 너비 180px, 헤더 "FILTER"(44px) + 태그 목록
+- [x] 왼쪽 사이드바: 너비 180px, 헤더 "FILTER"(44px) + 태그 목록
 
   ```tsx
   <aside style={{ width: "180px" }}>
