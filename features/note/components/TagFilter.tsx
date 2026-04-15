@@ -8,7 +8,10 @@ export function TagFilter({ tags }: Props) {
       className="flex flex-col"
       style={{ width: "180px", gap: "var(--margin-base)" }}
     >
-      <div className="flex flex-row justify-between border-b">
+      <div
+        className="flex flex-row items-baseline-last justify-between border-b"
+        style={{ paddingBottom: "8px", height: "44px" }}
+      >
         <p className="text-(length:--font-size-body) font-bold">FILTER</p>
         <button className="text-(length:--font-size-small) font-bold">
           CLEAR
