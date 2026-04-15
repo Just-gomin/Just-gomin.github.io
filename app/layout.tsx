@@ -60,11 +60,11 @@ export default function RootLayout({
         <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
       </head>
       <body
-        className={`${nanumGothicCoding.variable} antialiased font-nanum-gothic-coding `}
+        className={`${nanumGothicCoding.variable} antialiased font-nanum-gothic-coding`}
         style={{ padding: "var(--padding-base)" }}
       >
         <Nav />
-        <main>{children}</main>
+        <main style={{ marginTop: "var(--margin-base)" }}>{children}</main>
       </body>
     </html>
   );
