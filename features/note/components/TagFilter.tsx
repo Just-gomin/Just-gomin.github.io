@@ -12,8 +12,8 @@ export function TagFilter({ tags }: Props) {
         className="flex flex-row items-baseline-last justify-between border-b"
         style={{ paddingBottom: "8px", height: "44px" }}
       >
-        <p className="text-(length:--font-size-body) font-bold">FILTER</p>
-        <button className="text-(length:--font-size-small) font-bold">
+        <p className="text-(length:--font-size-subheading) font-bold">FILTER</p>
+        <button className="text-(length:--font-size-body) font-bold">
           CLEAR
         </button>
       </div>
