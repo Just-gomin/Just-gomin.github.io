@@ -20,7 +20,10 @@ export function Nav() {
   };
 
   return (
-    <nav style={{ height: 48 }} className="flex justify-between border-b">
+    <nav
+      style={{ padding: "var(--padding-base)" }}
+      className="flex justify-between border"
+    >
       <div className="flex gap-8">
         {NAV_LINKS.map(({ href, label }) => (
           <Link
