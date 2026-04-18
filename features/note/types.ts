@@ -1,6 +1,7 @@
 export type NoteMeta = {
   title: string;
   date: string; // ISO 8601 형식의 날짜 문자열
+  where?: string; // 노트 작성 장소 (예: "@HOME")
   description: string;
   tags: string[];
 };
