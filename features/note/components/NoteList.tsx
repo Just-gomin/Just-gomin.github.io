@@ -30,9 +30,9 @@ export function NoteList({ noteList }: Props) {
                 <br />
                 {note.where ? `@${note.where}` : ""}
               </p>
-              <p>
-                {note.title} |{note.description}
-              </p>
+              <h1 className="text-(length:--font-size-heading) font-bold">
+                {note.title}
+              </h1>
             </div>
           </Link>
         ))}
