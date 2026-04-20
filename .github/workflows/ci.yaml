@@ -2,7 +2,7 @@ name: "CI"
 
 on:
   pull_request:
-    types: ["opened", "synchronize", "reopened"]
+    types: [ "opened", "synchronize", "reopened" ]
     branches:
       - main
 
@@ -13,19 +13,19 @@ jobs:
     strategy:
       matrix:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-        node-version: [24.x]
+        node-version: [ 24.x ]
 
     steps:
       - name: "Repository Checkout"
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: "Setup pnpm"
-        uses: pnpm/action-setup@v4
+        uses: pnpm/action-setup@v6
         with:
           version: 10
 
       - name: "Setup Node.js"
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: ${{ matrix.node-version }}
           cache: "pnpm"
@@ -38,7 +38,6 @@ jobs:
 
       - name: "Build"
         run: pnpm build
-
       # TODO(Just-gomin): 7. Test 검증 - pnpm test
       # - name: "Test"
       #   run: pnpm test
