@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Just-gomin.log — mobile mockups</title>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; padding: 0; background: #1a1816; color: #fbfafa; font-family: "Nanum Gothic Coding", monospace; }
+  iframe { border: 0; width: 100%; height: 100%; display: block; background: #FBFAFA; }
+</style>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel" src="design-canvas.jsx"></script>
+<script type="text/babel" src="ios-frame.jsx"></script>
+<script type="text/babel">
+const { useEffect, useRef } = React;
+
+// BlogFrame — embed the live blog at a specific hash route inside an iOS device.
+function BlogFrame({ route, title, openDrawer = false, dark = false }) {
+  const ref = useRef(null);
+
+  // After load, optionally click the hamburger button to open the drawer.
+  useEffect(() => {
+    if (!openDrawer) return;
+    const iframe = ref.current;
+    if (!iframe) return;
+    const onLoad = () => {
+      // Give React a moment to mount.
+      setTimeout(() => {
+        try {
+          const doc = iframe.contentDocument;
+          if (!doc) return;
+          const btn = doc.querySelector(".header-hamburger");
+          if (btn) btn.click();
+        } catch (e) { /* cross-origin shouldn't happen — same origin */ }
+      }, 300);
+    };
+    iframe.addEventListener("load", onLoad);
+    return () => iframe.removeEventListener("load", onLoad);
+  }, [openDrawer]);
+
+  return (
+    <IOSDevice width={402} height={874} dark={dark}>
+      <iframe ref={ref} src={`Just-gomin.blog.html#${route}`} title={title} />
+    </IOSDevice>
+  );
+}
+
+function App() {
+  return (
+    <DesignCanvas>
+      <DCSection
+        id="primary"
+        title="01 / Primary screens"
+        subtitle="iPhone (402×874) · 같은 라우트, 모바일 브레이크포인트(≤720px)에서 자동 적용"
+      >
+        <DCArtboard id="home" label="HOME · 슬로건 타이핑" width={420} height={894}>
+          <BlogFrame route="/" title="home" />
+        </DCArtboard>
+        <DCArtboard id="notes" label="NOTES · 목록 + 필터" width={420} height={894}>
+          <BlogFrame route="/notes" title="notes" />
+        </DCArtboard>
+        <DCArtboard id="note" label="NOTE · 상세 + 인라인 TOC" width={420} height={894}>
+          <BlogFrame route="/notes/claude-md-as-context" title="note detail" />
+        </DCArtboard>
+        <DCArtboard id="resume" label="RESUME" width={420} height={894}>
+          <BlogFrame route="/resume" title="resume" />
+        </DCArtboard>
+      </DCSection>
+
+      <DCSection
+        id="utility"
+        title="02 / Utility · navigation"
+        subtitle="햄버거 드로어, 검색, 빈 상태"
+      >
+        <DCArtboard id="drawer" label="DRAWER · 좌측 슬라이드" width={420} height={894}>
+          <BlogFrame route="/" title="home with drawer open" openDrawer />
+        </DCArtboard>
+        <DCArtboard id="search" label="SEARCH · grep 프롬프트" width={420} height={894}>
+          <BlogFrame route="/search" title="search" />
+        </DCArtboard>
+        <DCArtboard id="about" label="ABOUT" width={420} height={894}>
+          <BlogFrame route="/about" title="about" />
+        </DCArtboard>
+        <DCArtboard id="tag" label="TAG · #Design 필터" width={420} height={894}>
+          <BlogFrame route="/tag/Design" title="tag page" />
+        </DCArtboard>
+      </DCSection>
+
+      <DCSection
+        id="notes-mobile"
+        title="04 / 디자인 노트"
+        subtitle="모바일 디자인의 의도와 다음 단계"
+      >
+        <DCPostIt top={20} left={40} rotate={-3} width={260}>
+          <strong>네비게이션</strong><br/>
+          햄버거 = `[≡]`, 닫기 = `[x]` — 본 사이트의 체크박스 어휘를 그대로 유지.
+        </DCPostIt>
+        <DCPostIt top={40} left={340} rotate={2} width={260}>
+          <strong>드로어</strong><br/>
+          햄버거가 좌측에 있으므로 드로어도 좌측에서 슬라이드인.
+          페이퍼 톤 배경 + 1px 우측 보더로 분리.
+        </DCPostIt>
+        <DCPostIt top={220} left={40} rotate={1.5} width={260}>
+          <strong>본문</strong><br/>
+          상세 페이지의 우측 TOC 는 모바일에서 숨기고,
+          상단 메타 영역만 가볍게 노출.
+        </DCPostIt>
+        <DCPostIt top={240} left={340} rotate={-1.5} width={260}>
+          <strong>다음 단계</strong><br/>
+          - 본문 모바일에서 인라인 TOC 토글 추가 검토<br/>
+          - Drawer 내 최근 노트 3개 단축 진입
+        </DCPostIt>
+      </DCSection>
+    </DesignCanvas>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+</script>
+</body>
+</html>

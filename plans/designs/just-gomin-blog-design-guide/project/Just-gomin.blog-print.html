@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="ko" data-theme="light" data-mood="terminal" data-accent="wine">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Just-gomin.log — print</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@400;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="styles.css" />
+
+<style>
+  /* ── Print-specific overrides ──────────────────────────────── */
+  @page {
+    size: A4 portrait;
+    margin: 14mm 12mm;
+  }
+
+  html, body {
+    background: #FBFAFA !important;
+    color: #5C5347 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Hide interactive chrome that doesn't make sense in print */
+  .header,
+  .drawer-backdrop,
+  .drawer,
+  .twk-panel,
+  .twk-fab,
+  .kbd-hint,
+  .footer .links,
+  .header-hamburger,
+  .search,
+  .copy-btn {
+    display: none !important;
+  }
+
+  /* Layout: remove flex viewport sizing, sticky positions */
+  .layout {
+    min-height: 0 !important;
+    padding: 0 !important;
+    gap: 0 !important;
+    display: block !important;
+  }
+  .page {
+    padding: 0 !important;
+    max-width: none !important;
+    animation: none !important;
+  }
+
+  /* Disable all animations + cursor blink */
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+  .cursor { display: none !important; }
+
+  /* Note detail — flatten 3-column layout to single column,
+     hide left meta sidebar AND right TOC (they print poorly) */
+  .note-detail-grid {
+    display: block !important;
+    padding: 0 !important;
+  }
+  .note-detail-grid .left,
+  .note-detail-grid .right {
+    display: none !important;
+  }
+  .note-detail-grid .content {
+    max-width: none !important;
+  }
+
+  /* Notes list — flatten 2-column to single column */
+  .notes-grid {
+    display: block !important;
+  }
+  .notes-sidebar {
+    display: none !important;
+  }
+  .note-row {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 4px !important;
+    padding: 10px 0 !important;
+    break-inside: avoid;
+  }
+
+  /* Resume tweaks for portrait paper */
+  .resume-profile {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+  .resume-career {
+    grid-template-columns: 1fr !important;
+    break-inside: avoid;
+  }
+  .resume-career-leading {
+    border-right: none !important;
+    border-bottom: 1px solid #DDD2C2 !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    gap: 8px 12px !important;
+    padding: 12px !important;
+  }
+  .resume-career-leading .role { font-size: 18px !important; }
+  .resume-career-body { padding: 12px !important; gap: 12px !important; }
+
+  /* Block-level break hints */
+  h1, h2, h3,
+  .md-h1, .md-h2, .md-h3,
+  .page-title {
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+  .codeblock,
+  .callout,
+  .md-table,
+  .toggle,
+  figure,
+  .swatch,
+  .type-row,
+  .note-row,
+  .resume-profile-col {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* Force key sections to start fresh */
+  .print-page-break {
+    break-before: page;
+    page-break-before: always;
+  }
+
+  /* Hero/home slogan — keep but constrain */
+  .slogan {
+    font-size: 28px !important;
+    line-height: 1.3 !important;
+  }
+  .slogan .ko { font-size: 14px !important; }
+
+  /* Code blocks — wrap so they don't overflow page */
+  .codeblock {
+    overflow: visible !important;
+  }
+  .codeblock pre {
+    white-space: pre-wrap !important;
+    word-break: break-word !important;
+  }
+
+  /* Tables full-width */
+  .md-table { width: 100% !important; }
+
+  /* Embed cards — flatten any iframes */
+  iframe { display: none !important; }
+
+  /* Print masthead inserted by the script */
+  .print-masthead {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    border-bottom: 1px solid #7C7365;
+    padding-bottom: 8px;
+    margin-bottom: 16px;
+    font-weight: 700;
+  }
+  .print-masthead .brand { font-size: 20px; }
+  .print-masthead .meta { font-size: 11px; color: #B8AE9E; font-weight: 400; }
+
+  /* Section dividers in the printed multi-page bundle */
+  .print-section-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #B8AE9E;
+    margin: 0 0 8px;
+  }
+</style>
+
+<link rel="icon" href="data:image/svg+xml;utf8,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'&gt;&lt;rect width='64' height='64' fill='%23FBFAFA'/&gt;&lt;polygon points='32,8 39,26 58,26 43,38 49,57 32,46 15,57 21,38 6,26 25,26' fill='%237C7365'/&gt;&lt;/svg&gt;" />
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+<script type="text/babel" src="data.jsx"></script>
+<script type="text/babel" src="components.jsx"></script>
+<script type="text/babel" src="pages.jsx"></script>
+<script type="text/babel" src="design-system.jsx"></script>
+
+<script type="text/babel">
+/*
+  Print-only app: renders the major routes (home, notes, sample note,
+  about, resume) stacked vertically with page breaks between them.
+  No header, no drawer, no tweaks, no animations.
+*/
+const { useEffect: usePrintEffect } = React;
+
+function PrintMasthead({ section }) {
+  return (
+    <div className="print-masthead">
+      <div className="brand">Just-gomin<span style={{ color: "var(--c-accent)" }}>.</span>log</div>
+      <div className="meta">{section} · printed {new Date().toLocaleDateString("ko-KR")}</div>
+    </div>
+  );
+}
+
+function PrintApp() {
+  const go = () => {}; // no-op nav for print
+  return (
+    <main className="page">
+      {/* HOME ─────────────────────────────────────────── */}
+      <section>
+        <PrintMasthead section="home · /" />
+        <div className="print-section-title">// home</div>
+        <HomePage go={go} />
+      </section>
+
+      <div className="print-page-break"></div>
+
+      {/* NOTES LIST ────────────────────────────────────── */}
+      <section>
+        <PrintMasthead section="notes · /notes" />
+        <div className="print-section-title">// notes index</div>
+        <NotesPage go={go} />
+      </section>
+
+      <div className="print-page-break"></div>
+
+      {/* SAMPLE NOTE DETAIL ─────────────────────────────── */}
+      <section>
+        <PrintMasthead section="note · /notes/claude-md-as-context" />
+        <div className="print-section-title">// note detail</div>
+        <NotePage id="claude-md-as-context" go={go} />
+      </section>
+
+      <div className="print-page-break"></div>
+
+      {/* ABOUT ─────────────────────────────────────────── */}
+      <section>
+        <PrintMasthead section="about · /about" />
+        <div className="print-section-title">// about</div>
+        <AboutPage go={go} />
+      </section>
+
+      <div className="print-page-break"></div>
+
+      {/* RESUME ────────────────────────────────────────── */}
+      <section>
+        <PrintMasthead section="resume · /resume" />
+        <div className="print-section-title">// resume</div>
+        <ResumePage />
+      </section>
+    </main>
+  );
+}
+
+function PrintRoot() {
+  usePrintEffect(() => {
+    // Wait for fonts + a small settle, then trigger print.
+    const trigger = async () => {
+      try { await document.fonts.ready; } catch (e) {}
+      await new Promise(r => setTimeout(r, 600));
+      window.print();
+    };
+    trigger();
+  }, []);
+  return <PrintApp />;
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<PrintRoot />);
+</script>
+</body>
+</html>
