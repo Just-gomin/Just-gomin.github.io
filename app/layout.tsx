@@ -6,7 +6,7 @@ import { Nav } from "@/features/common/components";
 
 const nanumGothicCoding = Nanum_Gothic_Coding({
   weight: ["400", "700"],
-  variable: "--font-nanum-gothic-coding",
+  variable: "--f-mono",
   subsets: ["latin"],
 });
 
