@@ -98,7 +98,7 @@
 
   생성되는 유틸리티 예: `bg-bg`, `bg-bg-sub`, `text-fg`, `text-fg-muted`, `text-accent`, `border-fg-faint`, `font-mono`.
 
-- [ ] **1-5. NanumGothicCoding 폰트 로드**
+- [x] **1-5. NanumGothicCoding 폰트 로드**
 
   `app/layout.tsx`에서 `next/font/google`로 폰트를 로드하고 `--f-mono` 변수에 연결합니다.
 
