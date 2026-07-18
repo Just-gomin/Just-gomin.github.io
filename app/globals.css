@@ -6,6 +6,23 @@
   --border: #7c7365;
   --padding-base: 12px;
   --margin-base: 12px;
+  --c-fg: #7c7365; /* 기본 텍스트 */
+  --c-fg-strong: #5c5347; /* 강조 / hover */
+  --c-fg-muted: #b8ae9e; /* 캡션, 메타 */
+  --c-fg-faint: #ddd2c2; /* 희미한 테두리 */
+  --c-bg: #fbfafa; /* 배경 */
+  --c-bg-sub: #f6f2ec; /* 서브 배경 */
+  --c-bg-code: #f2eee9; /* 코드 블록 배경 */
+  --c-bg-pop: #ffffff;
+  --c-stroke: #7c7365;
+  --c-stroke-faint: #ddd2c2;
+  --c-accent: #6b2c39; /* 딥 와인 */
+  --c-accent-soft: #6b2c3914;
+  --f-mono:
+    var(--font-nanum-gothic-coding), "D2Coding", "JetBrains Mono", ui-monospace,
+    SFMono-Regular, Menlo, Consolas, monospace;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-soft: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 @theme inline {
@@ -19,9 +36,82 @@
   --font-size-subheading: 20px;
   --font-size-body: 16px;
   --font-size-small: 12px;
+
+  --color-fg: var(--c-fg);
+  --color-fg-strong: var(--c-fg-strong);
+  --color-fg-muted: var(--c-fg-muted);
+  --color-fg-faint: var(--c-fg-faint);
+  --color-bg: var(--c-bg);
+  --color-bg-sub: var(--c-bg-sub);
+  --color-bg-code: var(--c-bg-code);
+  --color-accent: var(--c-accent);
+  --color-accent-soft: var(--c-accent-soft);
+  --font-mono: var(--f-mono);
 }
 
+[data-theme="dark"] {
+  --c-fg: #c7beb0;
+  --c-fg-strong: #e8e1d3;
+  --c-fg-muted: #8b8275;
+  --c-fg-faint: #4a4438;
+  --c-bg: #1a1815;
+  --c-bg-sub: #221e19;
+  --c-bg-code: #25211b;
+  --c-accent: #c77c8a;
+  --c-accent-soft: #c77c8a1f;
+  --c-stroke: #c7beb0;
+  --c-stroke-faint: #4a4438;
+}
+
+html,
 body {
-  background: var(--background);
-  color: var(--foreground);
+  font-family: var(--f-mono);
+  background: var(--c-bg);
+  color: var(--c-fg);
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--c-fg);
+  text-decoration: none;
+  position: relative;
+  transition: color 180ms var(--ease-out);
+}
+a:hover {
+  color: var(--c-accent);
+}
+a.link {
+  color: var(--c-accent);
+}
+a.link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 1px;
+  background: var(--c-accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 240ms var(--ease-out);
+}
+a.link:hover::after {
+  transform: scaleX(1);
+}
+
+::selection {
+  background: var(--c-accent);
+  color: var(--c-bg);
+}
+
+button {
+  font-family: inherit;
+}
+
+input {
+  font-family: inherit;
+}
+
+textarea {
+  font-family: inherit;
 }
