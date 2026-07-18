@@ -63,7 +63,8 @@
   --c-stroke-faint: #4a4438;
 }
 
-html body {
+html,
+body {
   font-family: var(--f-mono);
   background: var(--c-bg);
   color: var(--c-fg);
@@ -73,16 +74,29 @@ html body {
 a {
   color: var(--c-fg);
   text-decoration: none;
+  position: relative;
+  transition: color 180ms var(--ease-out);
 }
 a:hover {
   color: var(--c-accent);
 }
 a.link {
-  text-decoration: underline;
+  color: var(--c-accent);
 }
 a.link::after {
-  text-decoration: underline;
-  transform: scaleX(0, 1);
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 1px;
+  background: var(--c-accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 240ms var(--ease-out);
+}
+a.link:hover::after {
+  transform: scaleX(1);
 }
 
 ::selection {
