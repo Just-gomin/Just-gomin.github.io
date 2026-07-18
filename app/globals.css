@@ -42,3 +42,17 @@ body {
   background: var(--background);
   color: var(--foreground);
 }
+
+[data-theme="dark"] {
+  --c-fg: #c7beb0;
+  --c-fg-strong: #e8e1d3;
+  --c-fg-muted: #8b8275;
+  --c-fg-faint: #4a4438;
+  --c-bg: #1a1815;
+  --c-bg-sub: #221e19;
+  --c-bg-code: #25211b;
+  --c-accent: #c77c8a;
+  --c-accent-soft: #c77c8a1f;
+  --c-stroke: #c7beb0;
+  --c-stroke-faint: #4a4438;
+}
