@@ -124,7 +124,7 @@ Just-gomin.github.io/
 │   └── .nojekyll
 ├── mdx-components.tsx
 ├── next.config.ts
-├── tailwind.config.ts
+├── postcss.config.mjs           # Tailwind v4 PostCSS 플러그인 (@tailwindcss/postcss)
 ├── tsconfig.json
 └── package.json
 ```
@@ -172,7 +172,7 @@ touch public/.nojekyll
 - 의존성: 없음
 - 완료 기준:
   - [ ] `globals.css`에 토큰 정의 (라이트 단일, 올리브 액센트)
-  - [ ] `tailwind.config.ts`에 토큰을 Tailwind 색상으로 매핑
+  - [ ] `globals.css`의 `@theme inline` 블록에 토큰을 Tailwind 색상/폰트로 매핑 (Tailwind v4 · CSS-first)
   - [ ] `Nanum_Gothic_Coding`을 `--f-mono`에 연결
   - [ ] 17개 컴포넌트 구현 — Cursor, Check, AsciiDivider, Header(+Drawer), Footer, Layout, Typewriter, Tag, CopyButton, PageTitle, CodeBlock, Callout, Toggle, Blockquote, CheckList, ImagePlaceholder, Embed
   - [ ] `mdx-components.tsx`에서 MDX 요소를 위 컴포넌트로 매핑
@@ -336,7 +336,7 @@ export const CAREER: Career[] = [
 
 - [ ] 4-1. `globals.css`에 라이트 토큰 + 올리브 액센트(`#5b5c2a`) 정의 (1h)
 - [ ] 4-2. base 스타일 (html/body/a/`::selection`) (1h)
-- [ ] 4-3. `tailwind.config.ts`에 토큰 매핑 (30m)
+- [ ] 4-3. `globals.css`의 `@theme inline`에 토큰 매핑 (Tailwind v4) (30m)
 - [ ] 4-4. `Nanum_Gothic_Coding` 폰트를 `--f-mono`에 연결 (30m)
 - [ ] 4-5. `Header.tsx` + Drawer (모바일 햄버거) (4h)
 - [ ] 4-6. `Footer.tsx`, `Layout.tsx` (1h)

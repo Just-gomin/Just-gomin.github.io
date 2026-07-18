@@ -61,7 +61,7 @@
   }
   ```
 
-- [ ] **1-3. base 스타일 적용**
+- [x] **1-3. base 스타일 적용**
 
   `app/globals.css`에 다음 내용을 반영합니다.
   - `html, body`: `font-family: var(--f-mono)`, `background: var(--c-bg)`, `color: var(--c-fg)`, `-webkit-font-smoothing: antialiased`
@@ -70,30 +70,33 @@
   - `::selection`: `background: var(--c-accent); color: var(--c-bg)`
   - `button`, `input`, `textarea`: `font-family: inherit`
 
-- [ ] **1-4. Tailwind 연동**
+- [x] **1-4. Tailwind 연동 (Tailwind v4 · CSS-first)**
 
-  `tailwind.config.ts`에 CSS 변수를 Tailwind 색상으로 등록합니다.
+  > 이 프로젝트는 **Tailwind v4**를 사용합니다 (`app/globals.css`의 `@import "tailwindcss"` + `@theme inline`). `tailwind.config.ts`는 존재하지 않으며, 색상/폰트 매핑은 **`@theme inline` 블록**에서 처리합니다.
 
-  ```ts
-  theme: {
-    extend: {
-      colors: {
-        fg:         'var(--c-fg)',
-        'fg-strong':'var(--c-fg-strong)',
-        'fg-muted': 'var(--c-fg-muted)',
-        'fg-faint': 'var(--c-fg-faint)',
-        bg:         'var(--c-bg)',
-        'bg-sub':   'var(--c-bg-sub)',
-        'bg-code':  'var(--c-bg-code)',
-        accent:     'var(--c-accent)',
-        'accent-soft':'var(--c-accent-soft)',
-      },
-      fontFamily: {
-        mono: ['var(--f-mono)', 'monospace'],
-      },
-    },
+  `app/globals.css`의 기존 `@theme inline {}` 블록에 다음 토큰을 추가합니다. v4는 `--color-{name}` → `bg-{name}`/`text-{name}` 유틸리티, `--font-{name}` → `font-{name}` 유틸리티를 자동 생성합니다.
+
+  ```css
+  @theme inline {
+    /* 기존 내용 유지 ... */
+
+    /* colors */
+    --color-fg: var(--c-fg);
+    --color-fg-strong: var(--c-fg-strong);
+    --color-fg-muted: var(--c-fg-muted);
+    --color-fg-faint: var(--c-fg-faint);
+    --color-bg: var(--c-bg);
+    --color-bg-sub: var(--c-bg-sub);
+    --color-bg-code: var(--c-bg-code);
+    --color-accent: var(--c-accent);
+    --color-accent-soft: var(--c-accent-soft);
+
+    /* fonts */
+    --font-mono: var(--f-mono);
   }
   ```
+
+  생성되는 유틸리티 예: `bg-bg`, `bg-bg-sub`, `text-fg`, `text-fg-muted`, `text-accent`, `border-fg-faint`, `font-mono`.
 
 - [ ] **1-5. NanumGothicCoding 폰트 로드**
 

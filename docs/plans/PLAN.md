@@ -78,7 +78,7 @@ Just-gomin.github.io/
 │   └── .nojekyll                 # GitHub Pages Jekyll 비활성화
 ├── mdx-components.tsx            # MDX 커스텀 컴포넌트 정의
 ├── next.config.ts
-├── tailwind.config.ts
+├── postcss.config.mjs            # Tailwind v4 PostCSS 플러그인 (@tailwindcss/postcss)
 ├── tsconfig.json
 └── package.json
 ```
