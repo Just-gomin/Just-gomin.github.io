@@ -6,6 +6,23 @@
   --border: #7c7365;
   --padding-base: 12px;
   --margin-base: 12px;
+  --c-fg: #7c7365; /* 기본 텍스트 */
+  --c-fg-strong: #5c5347; /* 강조 / hover */
+  --c-fg-muted: #b8ae9e; /* 캡션, 메타 */
+  --c-fg-faint: #ddd2c2; /* 희미한 테두리 */
+  --c-bg: #fbfafa; /* 배경 */
+  --c-bg-sub: #f6f2ec; /* 서브 배경 */
+  --c-bg-code: #f2eee9; /* 코드 블록 배경 */
+  --c-bg-pop: #ffffff;
+  --c-stroke: #7c7365;
+  --c-stroke-faint: #ddd2c2;
+  --c-accent: #6b2c39; /* 딥 와인 */
+  --c-accent-soft: #6b2c3914;
+  --f-mono:
+    "NanumGothicCoding", "D2Coding", "JetBrains Mono", ui-monospace,
+    SFMono-Regular, Menlo, Consolas, monospace;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-soft: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 @theme inline {
