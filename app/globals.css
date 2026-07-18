@@ -19,7 +19,7 @@
   --c-accent: #6b2c39; /* 딥 와인 */
   --c-accent-soft: #6b2c3914;
   --f-mono:
-    "NanumGothicCoding", "D2Coding", "JetBrains Mono", ui-monospace,
+    var(--font-nanum-gothic-coding), "D2Coding", "JetBrains Mono", ui-monospace,
     SFMono-Regular, Menlo, Consolas, monospace;
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-soft: cubic-bezier(0.4, 0, 0.2, 1);
@@ -36,11 +36,17 @@
   --font-size-subheading: 20px;
   --font-size-body: 16px;
   --font-size-small: 12px;
-}
 
-body {
-  background: var(--background);
-  color: var(--foreground);
+  --color-fg: var(--c-fg);
+  --color-fg-strong: var(--c-fg-strong);
+  --color-fg-muted: var(--c-fg-muted);
+  --color-fg-faint: var(--c-fg-faint);
+  --color-bg: var(--c-bg);
+  --color-bg-sub: var(--c-bg-sub);
+  --color-bg-code: var(--c-bg-code);
+  --color-accent: var(--c-accent);
+  --color-accent-soft: var(--c-accent-soft);
+  --font-mono: var(--f-mono);
 }
 
 [data-theme="dark"] {
@@ -55,4 +61,43 @@ body {
   --c-accent-soft: #c77c8a1f;
   --c-stroke: #c7beb0;
   --c-stroke-faint: #4a4438;
+}
+
+html body {
+  font-family: var(--f-mono);
+  background: var(--c-bg);
+  color: var(--c-fg);
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--c-fg);
+  text-decoration: none;
+}
+a:hover {
+  color: var(--c-accent);
+}
+a.link {
+  text-decoration: underline;
+}
+a.link::after {
+  text-decoration: underline;
+  transform: scaleX(0, 1);
+}
+
+::selection {
+  background: var(--c-accent);
+  color: var(--c-bg);
+}
+
+button {
+  font-family: inherit;
+}
+
+input {
+  font-family: inherit;
+}
+
+textarea {
+  font-family: inherit;
 }
