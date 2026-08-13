@@ -52,7 +52,7 @@ PR 머지 순서는 `docs` → `chore` → `DS-02`입니다. 앞의 둘은 서�
   git tag backup/pre-pr-rewrite main
   ```
 
-- [ ] **1-2. `chore/format-dependencies` 브랜치 생성**
+- [x] **1-2. `chore/format-dependencies` 브랜치 생성**
 
   `b8011ef` 지점을 그대로 가리키게 만듭니다. 이 브랜치는 `e1a3431 + b8011ef`만 포함합니다.
 
@@ -60,7 +60,7 @@ PR 머지 순서는 `docs` → `chore` → `DS-02`입니다. 앞의 둘은 서�
   git branch chore/format-dependencies b8011ef
   ```
 
-- [ ] **1-3. `feat/ds-02-layout` 브랜치 생성 후 Header 커밋 재적용**
+- [x] **1-3. `feat/ds-02-layout` 브랜치 생성 후 Header 커밋 재적용**
 
   `b8011ef`를 건너뛰고 `f5f2d69`만 얹어야 하므로 cherry-pick을 씁니다.
 
@@ -70,7 +70,7 @@ PR 머지 순서는 `docs` → `chore` → `DS-02`입니다. 앞의 둘은 서�
   git cherry-pick f5f2d69
   ```
 
-- [ ] **1-4. `docs/plan-direct-commit-to-pr` 브랜치 생성 후 계획 문서 커밋**
+- [x] **1-4. `docs/plan-direct-commit-to-pr` 브랜치 생성 후 계획 문서 커밋**
 
   이 문서는 아직 untracked 상태이므로, 브랜치를 옮겨 다녀도 작업 디렉토리에 그대로 따라옵니다. 리셋 전에 커밋해 확정합니다.
 
@@ -80,7 +80,7 @@ PR 머지 순서는 `docs` → `chore` → `DS-02`입니다. 앞의 둘은 서�
   git commit -m "docs(plans): add plan for converting direct commits to PRs"
   ```
 
-- [ ] **1-5. 세 브랜치 원격 푸시**
+- [x] **1-5. 세 브랜치 원격 푸시**
 
   ```bash
   git push -u origin docs/plan-direct-commit-to-pr
