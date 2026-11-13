@@ -1,0 +1,25 @@
+version: 1
+
+project:
+  docs: docs
+
+analysis:
+  language: typescript
+  workspace: pnpm
+
+# 갈 곳 없는 원본을 두는 Drive 폴더. 정해지면 주석을 풀고 채웁니다.
+# origins:
+#   fallback: https://drive.google.com/drive/folders/...
+
+# id는 lore add source 입력의 channel 값과 짝을 이룹니다.
+# sensitivity: normal | sensitive | excluded. 여기에 없는 채널은 sensitive로 다룹니다.
+channels:
+  - id: github # PR, 이슈
+    tool: lore-connector-github
+    sensitivity: normal
+  - id: git # 커밋 이력
+    tool: lore-connector-git
+    sensitivity: normal
+  - id: plans # docs/plans의 기존 계획 문서
+    tool: agent
+    sensitivity: normal
