@@ -4,7 +4,7 @@
 
 ## 이 레포의 규칙
 
-- 학습용 개인 블로그입니다. `.claude/rules/work-myself.md`가 아래 lore 작업 순서보다 우선합니다. 에이전트는 구현을 직접 하지 않고 작업 목록과 설명을 제공하며, 사람이 "claude 작업 수행"이라고 명시한 경우에만 직접 구현합니다.
+- 학습용 개인 블로그입니다.
 - 명령: `pnpm dev`, `pnpm build`, `pnpm lint`. 테스트 스크립트는 아직 없습니다.
 - 정적 내보내기(`output: "export"`)로 GitHub Pages에 배포합니다.
 
