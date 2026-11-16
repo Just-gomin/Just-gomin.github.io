@@ -18,6 +18,7 @@
 
 - `note` · 노트 목록과 본문 · [스펙](specs/note.md)
 - `ADR-20261113-note-meta-json` · 노트의 메타데이터를 본문과 분리해 meta.json에 둔다 · [결정](decisions/ADR-20261113-note-meta-json.md)
+- `ADR-20261117-fail-build-on-invalid-note-date` · 노트 날짜가 잘못되면 빌드를 실패시킨다 · [결정](decisions/ADR-20261117-fail-build-on-invalid-note-date.md)
 
 ## resume
 
