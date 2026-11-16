@@ -9,7 +9,6 @@ export type NoteMeta = {
 export type Note = NoteMeta & {
   slug: string; // URL 경로에 사용되는 고유 식별자
   content: string; // 노트의 본문 내용 (마크다운 형식)
-  coverImage?: string; // 노트의 대표 이미지 URL
 };
 
 // 목록에 필요한 항목만 남긴 노트. 본문을 클라이언트로 넘기지 않기 위해 쓴다.
