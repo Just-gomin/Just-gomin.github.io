@@ -31,6 +31,7 @@ function getNoteSlugs(): string[] {
  * @param slug - 노트 디렉토리명
  * @returns 노트 메타데이터
  * @throws 파일이 없거나 JSON 파싱에 실패한 경우
+ * @throws date가 유효한 날짜가 아닌 경우. 정적 빌드를 실패시킨다.
  */
 function getNoteMeta(slug: string): NoteMeta {
   const slugPath = join(NOTES_DIR, slug, "meta.json");
@@ -38,7 +39,7 @@ function getNoteMeta(slug: string): NoteMeta {
   const metaData: NoteMeta = JSON.parse(metaFile);
 
   if (isNaN(Date.parse(metaData.date))) {
-    console.error(
+    throw new Error(
       `Note's date is not valid. slug: ${slug}, date: ${metaData.date}`,
     );
   }
