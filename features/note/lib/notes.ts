@@ -76,15 +76,30 @@ export function getNote(slug: string): Note {
 }
 
 /**
+ * slug를 로케일과 무관하게 UTF-16 코드 단위 순서로 비교한다.
+ */
+function compareSlug(a: string, b: string): number {
+  if (a < b) return -1;
+  if (a > b) return 1;
+  return 0;
+}
+
+/**
  * 전체 노트를 날짜 내림차순(최신순)으로 정렬하여 반환한다.
+ * 날짜가 같으면 slug 오름차순(로케일과 무관한 코드 단위 비교)으로 정렬해,
+ * 파일 시스템이 폴더를 돌려주는 순서와 상관없이 항상 같은 순서를 낸다.
  *
- * @returns 날짜 내림차순으로 정렬된 Note 배열
+ * @returns 날짜 내림차순, 같은 날짜는 slug 오름차순으로 정렬된 Note 배열
  */
 export function getAllNotes(): Note[] {
   const slugList = getNoteSlugs();
   const noteList: Note[] = slugList
     .map(getNote)
-    .sort((a, b) => compareDesc(parseISO(a.date), parseISO(b.date)));
+    .sort(
+      (a, b) =>
+        compareDesc(parseISO(a.date), parseISO(b.date)) ||
+        compareSlug(a.slug, b.slug),
+    );
 
   return noteList;
 }
