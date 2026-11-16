@@ -24,7 +24,8 @@
 | `docs/decisions/`       | 결정 기록. 왜 그렇게 만들었는지                                         |
 | `docs/incidents/`       | 사고 기록                                                               |
 | `docs/sources/`         | 소스 노트. 원본 자료를 정제한 요약과 원본 링크                          |
-| `docs/_templates/`      | lore가 설치되기 전에 손으로 기록을 만들 때 쓰는 템플릿                  |
+| `docs/_templates/`      | 스펙 템플릿. 결정, 사고, 소스 노트는 `lore add`로 만듭니다              |
+| `.claude/skills/`       | lore 스킬. `lore install`이 관리합니다                                  |
 | `docs/plans/`           | lore 도입 전의 계획 문서. `plans` 채널의 원본입니다                     |
 | `lore.config.yaml`      | 채널, 민감도 등급, 분석 설정                                            |
 
@@ -47,11 +48,11 @@
 고칠 파일이나 기능이 정해지면 먼저 조회합니다.
 
 ```sh
-lore why <파일 경로 | 심볼 | ID>
-lore impact <파일 경로 | 심볼 | ID> --hop=2
+lore why <파일 경로 | ID>
+lore impact <파일 경로 | ID> --hop=2
 ```
 
-`lore why`는 요약 목록부터 읽고, 필요한 기록만 `--depth doc`, 원본까지 필요하면 `--depth source`로 내려갑니다. 모든 명령은 JSON을 출력합니다. 사람에게 보여줄 때만 `--for-human`을 붙입니다.
+`lore why`는 요약 목록부터 읽고, 필요한 기록만 `--depth doc`, 원본까지 필요하면 `--depth source`로 내려갑니다. `lore impact`의 홉은 기능 사이를 건너는 횟수이며, 대상에 기대는(대상을 `depends_on`으로 가리키는) 기능 쪽으로 넓힙니다. 대상이 기대는 기능은 나오지 않습니다. 모든 명령은 JSON을 출력합니다. 사람에게 보여줄 때만 `--for-human`을 붙입니다.
 
 ### 2. 관련 자료 묻기
 
@@ -65,7 +66,9 @@ lore impact <파일 경로 | 심볼 | ID> --hop=2
 lore add source --from <JSON 파일>
 ```
 
-입력 JSON에는 `title`, `slug`(영문), `kind`, `channel`, `origin`, `origin_version`, `occurred_at`, `body`를 넣습니다. `channel`은 `lore.config.yaml`의 채널 `id`와 같아야 합니다.
+입력 JSON에는 `title`, `slug`(영문), `kind`, `channel`, `origin`, `origin_version`, `occurred_at`, `body`를 넣습니다. `channel`은 `lore.config.yaml`의 채널 `id`와 같아야 합니다. 민감 채널은 `body`를 빼고 넘깁니다.
+
+정제 기준과 입력 예시는 `lore-source` 스킬(`.claude/skills/lore-source/SKILL.md`)에 있습니다.
 
 ### 3. 설계 승인
 
@@ -85,41 +88,30 @@ lore add source --from <JSON 파일>
 
 이 작업으로 새로 정한 것이 있으면 결정 기록을 추가합니다.
 
+무엇을 기록하고 어떻게 채우는지는 `lore-record` 스킬(`.claude/skills/lore-record/SKILL.md`)에 있습니다. 스킬을 불러올 수 없는 에이전트는 그 파일을 직접 읽고 따릅니다.
+
 ```sh
-lore add decision                      # 새 결정
-lore add decision --supersedes <ID>    # 기존 결정을 대체
-lore add incident                      # 사고
+lore add decision --slug <영문 슬러그> --title <제목> --specs <스펙 ID>    # 새 결정
+lore add decision --slug <영문 슬러그> --title <제목> --supersedes <ID>   # 기존 결정을 대체
+lore add incident --slug <영문 슬러그> --title <제목> --specs <스펙 ID>   # 사고
+lore build                                                              # 본문을 채운 뒤
 ```
 
 - 결정 기록은 그 문서만 읽어도 이유를 알 수 있게 씁니다. 배경, 결정, 검토한 대안, 결과와 감수한 비용을 채웁니다.
 - 관계는 가리키는 쪽 파일에만 적습니다. 결정의 `specs`, `supersedes`, `sources`, 사고의 `specs`, `decisions`, `sources`입니다.
-- `--supersedes`를 쓰면 본문을 고쳐야 할 스펙이 출력됩니다. 그 스펙 본문을 지금 동작에 맞게 고칩니다.
+- `--supersedes`를 쓰면 본문을 고쳐야 할 스펙이 `specs_to_review`로 출력됩니다. 그 스펙 본문을 지금 동작에 맞게 고칩니다.
+- 본문을 채운 뒤 `lore build`로 `docs/INDEX.md`를 다시 만듭니다.
 - 동작이 바뀌었으면 해당 스펙 본문도 고칩니다.
 
 ### 6. PR
 
-코드와 `docs/` 변경을 한 PR에 담습니다. CI가 `lore check`를 실행합니다.
-
-- 경로, 참조, 머리말 형식, 소스 노트 신선도, 인덱스 일치, 안내문 일치는 통과해야 머지됩니다.
-- 스펙 동반 갱신과 매핑 누락은 경고입니다. 경고가 맞으면 고치고, 영향이 없으면 PR 설명에 한 줄을 적습니다.
-
-```
-lore: no-impact <스펙 ID> <사유>
-```
+코드와 `docs/` 변경을 한 PR에 담습니다.
 
 ### 하지 않는 것
 
 - `docs/INDEX.md`를 손으로 고치지 않습니다. 충돌하면 `lore build`로 다시 만듭니다.
-- 디비 파일을 커밋하지 않습니다. 디비는 소스에서 다시 만들 수 있는 빌드 산출물입니다.
+- 디비 파일을 커밋하지 않습니다. 디비는 소스에서 다시 만들 수 있는 빌드 산출물이며, 조회할 때 `.lore/`에 자동으로 만들어지고 git이 무시합니다.
 - 민감 등급 채널의 내용을 소스 노트나 결정 기록에 옮겨 적지 않습니다. 제목과 링크만 남기고, 결정의 이유는 구체적인 내용을 일반화해서 씁니다.
 - 제외 등급 채널은 읽지 않습니다.
-
-### lore가 아직 없을 때
-
-`lore` 명령이 설치되기 전에는 같은 순서를 손으로 따릅니다.
-
-- 조회: `docs/INDEX.md`와 `docs/specs/`에서 고칠 경로가 속한 스펙을 찾고, 그 스펙을 가리키는 결정과 사고 기록을 읽습니다.
-- 기록: `docs/_templates/`의 템플릿을 복사해 `docs/` 아래에 파일을 직접 만듭니다. ID는 `종류-날짜-슬러그` 형식입니다. 예: `ADR-20261113-mdx-pipeline`, `INC-20261113-build-failure`, `SRC-20261113-plan-notes`.
-- 인덱스: `docs/INDEX.md`에 한 줄을 직접 추가합니다. ID 순으로 정렬하고 스펙별로 묶습니다.
 
 <!-- lore:end -->
