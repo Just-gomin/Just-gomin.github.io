@@ -54,6 +54,33 @@ describe("getAllNotes", () => {
     ]);
   });
 
+  it("날짜가 같은 노트는 폴더를 읽은 순서와 상관없이 slug 오름차순으로 돌려준다", async () => {
+    writeNote("b-note", meta("2026-01-01"));
+    writeNote("newest", meta("2026-02-01"));
+    writeNote("a-note", meta("2026-01-01"));
+    writeNote("c-note", meta("2026-01-01"));
+    const expected = ["newest", "a-note", "b-note", "c-note"];
+
+    const { getAllNotes } = await loadNotes();
+    expect(getAllNotes().map((note) => note.slug)).toEqual(expected);
+
+    // 파일 시스템이 폴더를 반대 순서로 돌려줘도 결과는 같아야 한다.
+    vi.doMock("node:fs", async (importOriginal) => {
+      const actual = await importOriginal<typeof import("node:fs")>();
+      return {
+        ...actual,
+        readdirSync: (...args: Parameters<typeof actual.readdirSync>) =>
+          (actual.readdirSync(...args) as unknown[]).reverse(),
+      };
+    });
+    try {
+      const reversed = await loadNotes();
+      expect(reversed.getAllNotes().map((note) => note.slug)).toEqual(expected);
+    } finally {
+      vi.doUnmock("node:fs");
+    }
+  });
+
   it("날짜가 유효하지 않은 노트가 있으면 slug를 담은 오류를 던진다", async () => {
     writeNote("valid", meta("2026-01-01"));
     writeNote("broken", meta("not-a-date"));
