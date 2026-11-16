@@ -100,7 +100,7 @@ lore build                                                              # 본문
 - 결정 기록은 그 문서만 읽어도 이유를 알 수 있게 씁니다. 배경, 결정, 검토한 대안, 결과와 감수한 비용을 채웁니다.
 - 관계는 가리키는 쪽 파일에만 적습니다. 결정의 `specs`, `supersedes`, `sources`, 사고의 `specs`, `decisions`, `sources`입니다.
 - `--supersedes`를 쓰면 본문을 고쳐야 할 스펙이 `specs_to_review`로 출력됩니다. 그 스펙 본문을 지금 동작에 맞게 고칩니다.
-- 본문을 채운 뒤 `lore build`로 `docs/INDEX.md`를 다시 만듭니다.
+- 본문을 채우고 새 파일을 `git add`한 뒤 `lore build`로 `docs/INDEX.md`를 다시 만듭니다. 스펙의 `paths`, `tests`는 git이 추적하는 파일에만 맞춥니다.
 - 동작이 바뀌었으면 해당 스펙 본문도 고칩니다.
 
 ### 6. PR
