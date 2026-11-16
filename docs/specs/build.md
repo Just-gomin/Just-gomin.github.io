@@ -20,8 +20,8 @@ depends_on: []
 
 - `next.config.ts`가 정적 내보내기(`output: "export"`)를 켜고, 이미지 최적화를 끄고, URL 끝에 `/`를 붙입니다. `.md`와 `.mdx`를 페이지 확장자로 받아 MDX를 처리합니다.
 - `tsconfig.json`이 `@/*`를 레포 루트로 잇습니다. 코드의 `@/features/...`, `@/content/...` import가 이 설정에 기대고 있습니다.
-- `package.json`의 명령은 `pnpm dev`, `pnpm build`, `pnpm lint`입니다. 테스트 스크립트는 아직 없습니다. 커밋할 때 husky와 lint-staged가 eslint와 prettier를 돌립니다.
-- `ci.yaml`은 `main`으로 가는 PR에서 Node 24와 pnpm 10으로 lint와 build를 돌립니다.
+- `package.json`의 명령은 `pnpm dev`, `pnpm build`, `pnpm lint`, `pnpm test`입니다. `pnpm test`는 Vitest(`vitest run`)로 `*.test.ts`를 돌리며, 설정 파일 없이 기본값을 씁니다. Vitest를 고른 이유는 `ADR-20261117-vitest-test-runner`에 있습니다. 커밋할 때 husky와 lint-staged가 eslint와 prettier를 돌립니다.
+- `ci.yaml`은 `main`으로 가는 PR에서 Node 24와 pnpm 10으로 lint, build, test를 돌립니다.
 - `deploy.yaml`은 `main`에 push되면 build한 `out/`을 GitHub Pages에 배포합니다.
 
 ## 범위에 넣지 않은 것

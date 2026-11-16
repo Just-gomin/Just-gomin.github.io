@@ -38,6 +38,6 @@ jobs:
 
       - name: "Build"
         run: pnpm build
-      # TODO(Just-gomin): 7. Test 검증 - pnpm test
-      # - name: "Test"
-      #   run: pnpm test
+
+      - name: "Test"
+        run: pnpm test
