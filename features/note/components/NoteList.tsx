@@ -1,9 +1,9 @@
 import Link from "next/link";
-import { Note } from "../types";
+import { NoteSummary } from "../types";
 import { format } from "date-fns";
 
 type Props = {
-  noteList: Note[];
+  noteList: NoteSummary[];
 };
 
 export function NoteList({ noteList }: Props) {
