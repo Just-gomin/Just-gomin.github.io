@@ -5,6 +5,7 @@
 ## build
 
 - `build` · 빌드와 배포 · [스펙](specs/build.md)
+- `ADR-20261117-vitest-test-runner` · 테스트 러너로 Vitest를 쓴다 · [결정](decisions/ADR-20261117-vitest-test-runner.md)
 
 ## common
 

@@ -5,7 +5,8 @@ paths:
   - features/note/**
   - app/notes/**
   - mdx-components.tsx
-tests: []
+tests:
+  - features/note/**/*.test.ts
 depends_on: [common]
 ---
 
@@ -15,6 +16,7 @@ depends_on: [common]
 - `meta.json`에는 `title`, `date`(ISO 8601), `description`, `tags`가 있고 `where`는 선택입니다.
 - `features/note/lib/notes.ts`가 빌드 시점에 파일 시스템을 읽습니다. `getAllNotes`는 전체 노트를 날짜 내림차순으로 돌려주고, `getNote`는 한 편을, `generateNoteStaticParams`는 정적 경로용 slug 목록을 돌려줍니다.
 - `meta.json`의 `date`가 유효한 날짜가 아니면 slug와 잘못된 값을 담은 오류를 던져 빌드를 실패시킵니다. 이유는 `ADR-20261117-fail-build-on-invalid-note-date`에 있습니다.
+- `features/note/lib/notes.test.ts`가 임시 폴더에 노트를 만들어 날짜 내림차순 정렬, 잘못된 날짜의 오류, `getNote`의 결과를 확인합니다. 실제 `content/notes`에는 기대지 않습니다.
 - `/notes`는 왼쪽에 태그 필터, 오른쪽에 노트 목록을 보여 줍니다. 목록의 각 줄은 날짜, 장소, 제목이며 `/notes/<slug>`로 이동합니다.
 - `/notes/[slug]`는 `meta.json`으로 페이지 제목과 설명을 만들고, `index.mdx`를 동적 import해 렌더링합니다.
 - `mdx-components.tsx`가 MDX의 제목, 문단, 목록, 링크, 코드를 블로그 스타일로 바꿉니다. 코드 블록은 shiki의 `vitesse-light` 테마로 하이라이트하고, 링크는 새 탭으로 엽니다. MDX는 지금 노트에서만 쓰므로 이 스펙에 둡니다.
