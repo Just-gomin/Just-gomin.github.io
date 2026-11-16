@@ -11,3 +11,6 @@ export type Note = NoteMeta & {
   content: string; // 노트의 본문 내용 (마크다운 형식)
   coverImage?: string; // 노트의 대표 이미지 URL
 };
+
+// 목록에 필요한 항목만 남긴 노트. 본문을 클라이언트로 넘기지 않기 위해 쓴다.
+export type NoteSummary = Omit<Note, "content">;
