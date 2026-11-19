@@ -1,4 +1,4 @@
-# lore-hash: d2db120b151d6ca15172c913877986a4e0187abbff5eb0bb66d90feb981fca1b
+# lore-hash: d3a3629248092c6b33dc372ef3fd8b78a0216e1d3d2ec8fb04a50b9c70cc9178
 # lore install이 설치한 워크플로입니다. 고치면 lore install이 덮어쓰지 않고 lore uninstall이 지우지 않습니다.
 name: "lore"
 
@@ -20,7 +20,7 @@ jobs:
     if: github.event.pull_request.state == 'open'
     runs-on: ubuntu-latest
     env:
-      LORE_VERSION: "0.1.0"
+      LORE_VERSION: "0.1.1"
       LORE_REPO: "Just-gomin/lore"
     steps:
       # 비교 기준(merge-base)을 찾으려면 전체 이력이 필요합니다.
