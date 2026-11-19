@@ -129,7 +129,7 @@ layout (.layout)
 
 ### 작업 목록
 
-- [ ] **2-1. `features/common/components/Header.tsx` 구현**
+- [x] **2-1. `features/common/components/Header.tsx` 구현**
 
   구조는 `components.jsx`의 `Header` 컴포넌트를 참고합니다.
   - 상단 sticky 헤더 (`position: sticky; top: 12px; height: 48px; border: 1px solid var(--c-fg); z-index: 50`)

@@ -23,6 +23,27 @@
     SFMono-Regular, Menlo, Consolas, monospace;
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-soft: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* 글자 크기 */
+  --t-10: 10px;
+  --t-12: 12px;
+  --t-14: 14px;
+  --t-16: 16px;
+  --t-20: 20px;
+  --t-24: 24px;
+  --t-32: 32px;
+
+  /* 간격 (4px 단위) */
+  --s-4: 4px;
+  --s-8: 8px;
+  --s-12: 12px;
+  --s-16: 16px;
+  --s-20: 20px;
+  --s-32: 32px;
+
+  /* 선 */
+  --line: 1px solid var(--c-stroke);
+  --line-faint: 1px solid var(--c-stroke-faint);
 }
 
 @theme inline {
@@ -114,4 +135,59 @@ input {
 
 textarea {
   font-family: inherit;
+}
+
+/* ─── Header ───────────────────────────────────────────────────── */
+
+.header {
+  height: 48px;
+  border: var(--line);
+  display: flex;
+  align-items: center;
+  padding: 0 var(--s-12);
+  gap: var(--s-12);
+  font-weight: 700;
+  background: var(--c-bg);
+  position: sticky;
+  top: var(--s-12);
+  z-index: 50;
+}
+
+.header-nav {
+  display: flex;
+  gap: var(--s-12);
+  align-items: center;
+  flex: 1;
+}
+
+.header-nav a {
+  font-weight: 700;
+}
+.header-nav a.is-active {
+  color: var(--c-fg-strong);
+}
+
+.header-brand {
+  font-weight: 700;
+  font-size: var(--t-24);
+  letter-spacing: -0.01em;
+}
+.header-brand .dot {
+  color: var(--c-accent);
+}
+
+@media (max-width: 720px) {
+  .header {
+    justify-content: space-between;
+    height: 56px;
+  }
+  .header-brand {
+    font-size: var(--t-20);
+  }
+}
+
+@media (max-width: 420px) {
+  .header-brand {
+    font-size: var(--t-16);
+  }
 }
