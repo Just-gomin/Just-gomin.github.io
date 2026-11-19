@@ -61,11 +61,14 @@ export default function RootLayout({
       </head>
       <body
         className={`${nanumGothicCoding.variable} font-nanum-gothic-coding antialiased`}
-        style={{ padding: "var(--padding-base)" }}
       >
-        <Header />
-        <main style={{ marginTop: "var(--margin-base)" }}>{children}</main>
-        <Footer />
+        <div className="layout bg-bg flex min-h-screen flex-col gap-3 p-3">
+          <Header />
+          <main className="page animate-page-in mx-auto flex w-full max-w-[1440px] flex-1 flex-col">
+            {children}
+          </main>
+          <Footer />
+        </div>
       </body>
     </html>
   );

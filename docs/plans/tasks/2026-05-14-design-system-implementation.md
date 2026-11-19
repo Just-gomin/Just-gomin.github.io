@@ -153,7 +153,7 @@ layout (.layout)
 
   - `border-top: var(--line-faint)`, `color: var(--c-fg-muted)`, `font-size: 12px`
 
-- [ ] **2-4. `app/layout.tsx` 루트 레이아웃 업데이트**
+- [x] **2-4. `app/layout.tsx` 루트 레이아웃 업데이트**
   - `.layout` 클래스: `min-h-screen flex flex-col gap-3 p-3 bg-bg`
   - `<main class="page">`: `flex-1 flex flex-col max-w-[1440px] w-full mx-auto animate-page-in`
   - Tailwind `animate-page-in` 커스텀 애니메이션 등록 (`from: opacity-0 translateY(4px)`)
