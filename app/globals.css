@@ -151,6 +151,54 @@ textarea {
   font-family: inherit;
 }
 
+/* ─── Cursor ───────────────────────────────────────────────────── */
+
+.cursor {
+  display: inline-block;
+  width: 0.55em;
+  height: 1em;
+  background: var(--c-fg);
+  vertical-align: -0.12em;
+  margin-left: 0.05em;
+  animation: blink 1.06s steps(2, start) infinite;
+}
+.cursor.accent {
+  background: var(--c-accent);
+}
+@keyframes blink {
+  to {
+    visibility: hidden;
+  }
+}
+
+/* ─── ASCII divider ────────────────────────────────────────────── */
+
+.ascii-divider {
+  color: var(--c-fg-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  user-select: none;
+  letter-spacing: 0;
+}
+.ascii-divider::before {
+  content: "─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─";
+}
+.ascii-divider-label {
+  display: flex;
+  align-items: center;
+  gap: var(--s-8);
+  color: var(--c-fg-muted);
+  font-size: var(--t-12);
+}
+.ascii-divider-label .line {
+  flex: 1;
+  border-bottom: 1px dashed var(--c-stroke-faint);
+}
+.ascii-divider-label .label {
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
 /* ─── Header ───────────────────────────────────────────────────── */
 
 .header {
@@ -260,8 +308,6 @@ textarea {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-bottom: var(--s-12);
-  border-bottom: var(--line-faint);
 }
 .drawer-title {
   font-size: var(--t-14);
@@ -300,8 +346,6 @@ textarea {
   display: flex;
   flex-direction: column;
   gap: var(--s-8);
-  padding-top: var(--s-12);
-  border-top: var(--line-faint);
   font-size: var(--t-14);
 }
 .drawer-foot a {

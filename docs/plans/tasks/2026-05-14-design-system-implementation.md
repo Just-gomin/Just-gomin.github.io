@@ -166,7 +166,7 @@ layout (.layout)
 
 ### 작업 목록
 
-- [ ] **3-1. `Cursor.tsx`**
+- [x] **3-1. `Cursor.tsx`**
 
   깜박이는 커서 컴포넌트.
 
@@ -175,7 +175,7 @@ layout (.layout)
   // accent prop: background: var(--c-accent) (기본은 var(--c-fg))
   ```
 
-- [ ] **3-2. `AsciiDivider.tsx`**
+- [x] **3-2. `AsciiDivider.tsx`**
 
   두 가지 변형:
   - 기본: `─ ─ ─ ─ ...` 반복 (`::before` content, `overflow: hidden`)
