@@ -20,11 +20,10 @@
 | `mdx-components.tsx`    | MDX 요소별 렌더링과 코드 하이라이트                                     |
 | `public/`               | 정적 파일                                                               |
 | `docs/INDEX.md`         | 모든 기록의 한 줄 목록                                                  |
-| `docs/specs/`           | 기능 스펙. 기능이 지금 어떻게 동작하는지                                |
+| `docs/specs/`           | 기능 스펙. 기능이 지금 어떻게 동작하는지. `lore add spec`으로 만듭니다  |
 | `docs/decisions/`       | 결정 기록. 왜 그렇게 만들었는지                                         |
 | `docs/incidents/`       | 사고 기록                                                               |
 | `docs/sources/`         | 소스 노트. 원본 자료를 정제한 요약과 원본 링크                          |
-| `docs/_templates/`      | 스펙 템플릿. 결정, 사고, 소스 노트는 `lore add`로 만듭니다              |
 | `.claude/skills/`       | lore 스킬. `lore install`이 관리합니다                                  |
 | `docs/plans/`           | lore 도입 전의 계획 문서. `plans` 채널의 원본입니다                     |
 | `lore.config.yaml`      | 채널, 민감도 등급, 분석 설정                                            |
