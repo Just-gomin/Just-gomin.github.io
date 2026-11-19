@@ -1,3 +1,5 @@
+import { Tag } from "@/features/common/components";
+
 type Props = {
   tags: string[];
   selectedTags: string[];
@@ -25,20 +27,15 @@ export function TagFilter({ tags, selectedTags, onToggle, onClear }: Props) {
           CLEAR
         </button>
       </div>
-      <div>
-        {tags.map((tag: string) => {
-          const isSelected = selectedTags.includes(tag);
-          return (
-            <button
-              key={tag}
-              aria-pressed={isSelected}
-              disabled={!onToggle}
-              onClick={onToggle && (() => onToggle(tag))}
-            >
-              {isSelected ? "[*]" : "[ ]"} {tag}
-            </button>
-          );
-        })}
+      <div className="flex flex-wrap gap-x-3 gap-y-1">
+        {tags.map((tag: string) => (
+          <Tag
+            key={tag}
+            label={tag}
+            active={selectedTags.includes(tag)}
+            onClick={onToggle && (() => onToggle(tag))}
+          />
+        ))}
       </div>
     </div>
   );

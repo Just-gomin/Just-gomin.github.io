@@ -181,7 +181,7 @@ layout (.layout)
   - 기본: `─ ─ ─ ─ ...` 반복 (`::before` content, `overflow: hidden`)
   - `label` prop 있을 때: `── label ──` (dashed border, 좌우 line)
 
-- [ ] **3-3. `Tag.tsx`**
+- [x] **3-3. `Tag.tsx`**
 
   ```tsx
   // 형태: #label count

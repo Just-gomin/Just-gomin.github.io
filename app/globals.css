@@ -199,6 +199,48 @@ textarea {
   letter-spacing: 0.06em;
 }
 
+/* ─── Tag ──────────────────────────────────────────────────────── */
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 0;
+  border: none;
+  font-family: inherit;
+  font-size: var(--t-12);
+  font-weight: 700;
+  color: var(--c-fg-muted);
+  background: transparent;
+  cursor: pointer;
+  transition: color 140ms var(--ease-out);
+}
+.tag:hover:enabled {
+  color: var(--c-fg);
+}
+.tag:disabled {
+  cursor: default;
+}
+.tag.is-active {
+  color: var(--c-accent);
+}
+.tag .check {
+  display: inline-block;
+  overflow: hidden;
+  opacity: 0;
+  width: 0;
+  transition: all 140ms var(--ease-out);
+}
+.tag.is-active .check {
+  opacity: 1;
+  width: 12px;
+}
+.tag .count {
+  color: var(--c-fg-muted);
+  margin-left: var(--s-4);
+  font-weight: 400;
+}
+
 /* ─── Header ───────────────────────────────────────────────────── */
 
 .header {
