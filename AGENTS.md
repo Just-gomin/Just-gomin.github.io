@@ -103,9 +103,25 @@ lore build                                                              # 본문
 - 본문을 채우고 새 파일을 `git add`한 뒤 `lore build`로 `docs/INDEX.md`를 다시 만듭니다. 스펙의 `paths`, `tests`는 git이 추적하는 파일에만 맞춥니다.
 - 동작이 바뀌었으면 해당 스펙 본문도 고칩니다.
 
-### 6. PR
+### 6. PR과 검사
 
-코드와 `docs/` 변경을 한 PR에 담습니다.
+코드와 `docs/` 변경을 한 PR에 담습니다. PR을 올리기 전에 검사합니다. CI도 PR마다 같은 검사를 PR 설명과 함께 돌려 결과를 PR 코멘트로 남깁니다.
+
+```sh
+lore check --base origin/main
+lore check --base origin/main --pr-body <PR 설명 파일>   # no-impact 줄까지 반영
+```
+
+- **실패**: 경로 유효성, 참조 유효성, 머리말 형식, 인덱스 일치, 안내문 일치, 소스 노트 신선도(원본의 최신 판 목록을 `--origins`로 줄 때만). 레포가 lore 검사를 필수 상태 검사로 등록했으면 병합할 수 없습니다. 출력의 `fix`대로 고칩니다.
+- **경고는 병합을 막지 않습니다**: 스펙 동반 갱신, 매핑 누락. 경고마다 처리를 기록해 나중에 차단할지 정합니다.
+  - 스펙 동반 갱신: 바뀐 코드가 속한 스펙이 같은 PR에서 바뀌지 않았습니다. 스펙 본문을 고치거나, 동작이 그대로라 고칠 문장이 없으면 PR 설명에 `lore: no-impact <스펙 ID> <사유>` 한 줄을 적습니다.
+  - 매핑 누락: 새 파일이 어떤 스펙의 `paths`, `tests`에도 맞지 않습니다. 맡을 스펙에 더하고, 코드가 아니면 `lore.config.yaml`의 `check.ignore`에 더합니다.
+
+파일을 옮겼거나 `lore` 없이 코드를 바꿔 스펙이 어긋났으면 `lore-sync` 스킬(`.claude/skills/lore-sync/SKILL.md`)을 따릅니다.
+
+```sh
+lore sync --base origin/main
+```
 
 ### 하지 않는 것
 
