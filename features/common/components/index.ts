@@ -1,1 +1,2 @@
-export { Nav } from "./Nav";
+export { Check } from "./Check";
+export { Header } from "./Header";
