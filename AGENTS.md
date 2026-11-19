@@ -48,10 +48,10 @@
 
 ```sh
 lore why <파일 경로 | ID>
-lore impact <파일 경로 | ID> --hop=2
+lore impact <파일 경로 | ID | 파일 경로#심볼> --hop=2
 ```
 
-`lore why`는 요약 목록부터 읽고, 필요한 기록만 `--depth doc`, 원본까지 필요하면 `--depth source`로 내려갑니다. `lore impact`의 홉은 기능 사이를 건너는 횟수이며, 대상에 기대는(대상을 `depends_on`으로 가리키는) 기능 쪽으로 넓힙니다. 대상이 기대는 기능은 나오지 않습니다. 모든 명령은 JSON을 출력합니다. 사람에게 보여줄 때만 `--for-human`을 붙입니다.
+`lore why`는 요약 목록부터 읽고, 필요한 기록만 `--depth doc`, 원본까지 필요하면 `--depth source`로 내려갑니다. `lore impact`의 홉은 기능 사이를 건너는 횟수이며, 대상에 기대는(대상을 `depends_on`으로 가리키거나, `analysis`를 켠 레포에서 대상을 import하는) 기능 쪽으로 넓힙니다. 대상이 기대는 기능은 나오지 않습니다. 항목의 `evidence`가 `declared`면 스펙에 선언한 길, `inferred`면 정적 분석이 찾은 길이며, 한 기능이 두 근거로 함께 나올 수 있습니다. 모든 명령은 JSON을 출력합니다. 사람에게 보여줄 때만 `--for-human`을 붙입니다.
 
 ### 2. 관련 자료 묻기
 
