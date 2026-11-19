@@ -145,7 +145,7 @@ layout (.layout)
   - Drawer: 좌측 슬라이드-인 (`width: min(320px, 86vw)`), backdrop 클릭으로 닫기
   - `Esc` 키로 닫기, 라우트 변경 시 자동 닫기
 
-- [ ] **2-3. `features/common/components/Footer.tsx` 구현**
+- [x] **2-3. `features/common/components/Footer.tsx` 구현**
 
   ```text
   © 2026 Just-gomin · just0gomin@gmail.com     github · design-system · built with [x] care

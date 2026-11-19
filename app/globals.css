@@ -176,6 +176,30 @@ textarea {
   color: var(--c-accent);
 }
 
+/* ─── Footer ───────────────────────────────────────────────────── */
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--s-12);
+  padding: var(--s-16) var(--s-12);
+  color: var(--c-fg-muted);
+  font-size: var(--t-12);
+  border-top: var(--line-faint);
+  margin-top: var(--s-32);
+}
+.footer .links {
+  display: flex;
+  gap: var(--s-12);
+}
+.footer a {
+  color: var(--c-fg-muted);
+}
+.footer a:hover {
+  color: var(--c-accent);
+}
+
 /* ─── Mobile drawer ────────────────────────────────────────────── */
 
 .header-hamburger {
@@ -305,6 +329,16 @@ textarea {
   }
   .header-brand {
     font-size: var(--t-20);
+  }
+  .footer {
+    flex-direction: column;
+    gap: var(--s-8);
+    align-items: flex-start;
+    font-size: 11px;
+    padding: var(--s-12);
+  }
+  .footer .links {
+    flex-wrap: wrap;
   }
 }
 
