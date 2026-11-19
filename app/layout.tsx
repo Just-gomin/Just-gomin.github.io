@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Nanum_Gothic_Coding } from "next/font/google";
 import "./globals.css";
 import { BLOG_DESCRIPTION, BLOG_TITLE } from "@/features/common";
-import { Header } from "@/features/common/components";
+import { Footer, Header } from "@/features/common/components";
 
 const nanumGothicCoding = Nanum_Gothic_Coding({
   weight: ["400", "700"],
@@ -65,6 +65,7 @@ export default function RootLayout({
       >
         <Header />
         <main style={{ marginTop: "var(--margin-base)" }}>{children}</main>
+        <Footer />
       </body>
     </html>
   );
