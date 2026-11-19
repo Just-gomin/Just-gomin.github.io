@@ -7,7 +7,7 @@ type TagProps = {
   onClick?: () => void;
 };
 
-/** `#label`꼴 태그. 선택되면 앞에 `x`를 붙이고 강조 색으로 보여 줍니다. */
+/** `#label` 꼴 태그. 선택되면 앞에 `x`를 붙이고 강조 색으로 보여 줍니다. */
 export function Tag({ label, count, active = false, onClick }: TagProps) {
   return (
     <button
