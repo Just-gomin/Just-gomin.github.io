@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { AsciiDivider } from "./AsciiDivider";
 import { Check } from "./Check";
 
 export const NAV_LINKS = [
@@ -90,6 +91,7 @@ export function Header() {
                 [x] close
               </button>
             </div>
+            <AsciiDivider />
             <nav className="drawer-nav">
               {links.map(({ href, label, active }) => (
                 <Link
@@ -103,6 +105,7 @@ export function Header() {
                 </Link>
               ))}
             </nav>
+            <AsciiDivider />
             <div className="drawer-foot">
               <a
                 href="https://github.com/Just-gomin"
