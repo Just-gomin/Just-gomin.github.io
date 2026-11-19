@@ -190,7 +190,7 @@ layout (.layout)
   // onClick: 필터 toggle용
   ```
 
-- [ ] **3-4. `PageTitle.tsx`**
+- [x] **3-4. `PageTitle.tsx`**
 
   ```tsx
   // <h1 class="page-title">
@@ -201,14 +201,14 @@ layout (.layout)
   // font-size: 24px, font-weight: 700
   ```
 
-- [ ] **3-5. `Typewriter.tsx`**
+- [x] **3-5. `Typewriter.tsx`**
 
   타이핑 애니메이션 컴포넌트. `pages.jsx`의 `Typewriter`를 참고합니다.
   - `text` (단순 문자열) 또는 `segments` (링크 포함 배열) 지원
   - `speed`, `delay`, `onDone`, `cursor` props
   - 내부 state로 글자 수를 카운트하며 렌더링
 
-- [ ] **3-6. barrel export 정리**
+- [x] **3-6. barrel export 정리**
 
   `features/common/components/index.ts`에 위 컴포넌트 전체 export 추가.
 

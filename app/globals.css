@@ -199,6 +199,27 @@ textarea {
   letter-spacing: 0.06em;
 }
 
+/* ─── Page title ───────────────────────────────────────────────── */
+
+.page-title {
+  font-size: var(--t-24);
+  font-weight: 700;
+  display: flex;
+  align-items: baseline;
+  gap: var(--s-8);
+}
+.page-title .prefix {
+  color: var(--c-fg-muted);
+  font-weight: 400;
+}
+
+@media (max-width: 720px) {
+  .page-title {
+    font-size: var(--t-20);
+    flex-wrap: wrap;
+  }
+}
+
 /* ─── Tag ──────────────────────────────────────────────────────── */
 
 .tag {
