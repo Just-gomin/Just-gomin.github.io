@@ -176,7 +176,129 @@ textarea {
   color: var(--c-accent);
 }
 
+/* ─── Mobile drawer ────────────────────────────────────────────── */
+
+.header-hamburger {
+  display: none;
+  appearance: none;
+  background: transparent;
+  border: none;
+  color: var(--c-fg);
+  font-family: inherit;
+  font-weight: 700;
+  font-size: var(--t-16);
+  padding: var(--s-4) var(--s-8);
+  cursor: pointer;
+}
+.header-hamburger:hover {
+  color: var(--c-accent);
+}
+
+.drawer-backdrop {
+  position: fixed;
+  inset: 0;
+  background: color-mix(in srgb, var(--c-bg) 70%, transparent);
+  backdrop-filter: blur(2px);
+  z-index: 80;
+  animation: drawer-fade 160ms var(--ease-out);
+}
+.drawer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: min(320px, 86vw);
+  background: var(--c-bg);
+  border-right: var(--line);
+  padding: var(--s-16) var(--s-20);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-16);
+  z-index: 90;
+  font-weight: 400;
+  animation: drawer-slide 200ms var(--ease-out);
+}
+.drawer-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: var(--s-12);
+  border-bottom: var(--line-faint);
+}
+.drawer-title {
+  font-size: var(--t-14);
+  color: var(--c-fg-muted);
+  font-weight: 700;
+}
+.drawer-close {
+  appearance: none;
+  background: transparent;
+  border: none;
+  color: var(--c-fg-muted);
+  font-family: inherit;
+  font-size: var(--t-12);
+  font-weight: 700;
+  cursor: pointer;
+  padding: var(--s-4) var(--s-8);
+}
+.drawer-close:hover {
+  color: var(--c-accent);
+}
+.drawer-nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-12);
+}
+.drawer-nav a {
+  font-size: var(--t-20);
+  font-weight: 700;
+  padding: var(--s-4) 0;
+}
+.drawer-nav a.is-active {
+  color: var(--c-fg-strong);
+}
+.drawer-foot {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-8);
+  padding-top: var(--s-12);
+  border-top: var(--line-faint);
+  font-size: var(--t-14);
+}
+.drawer-foot a {
+  color: var(--c-fg-muted);
+}
+.drawer-foot a:hover {
+  color: var(--c-accent);
+}
+
+@keyframes drawer-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes drawer-slide {
+  from {
+    transform: translateX(-8px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
 @media (max-width: 720px) {
+  .header-nav {
+    display: none;
+  }
+  .header-hamburger {
+    display: inline-flex;
+  }
   .header {
     justify-content: space-between;
     height: 56px;

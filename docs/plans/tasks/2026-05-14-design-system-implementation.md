@@ -138,7 +138,7 @@ layout (.layout)
   - `[x]`/`[ ]` 체크박스 패턴: `<Check>` 컴포넌트 형태로 분리 (`features/common/components/Check.tsx`)
   - `usePathname()`으로 현재 경로 감지
 
-- [ ] **2-2. 모바일 햄버거 & Drawer 구현**
+- [x] **2-2. 모바일 햄버거 & Drawer 구현**
 
   `components.jsx`의 `Header` 모바일 부분을 참고합니다.
   - `max-width: 720px` 미만에서 nav 숨김, 햄버거 버튼(`[≡]`) 표시
