@@ -5,7 +5,8 @@ paths:
   - features/common/**
   - app/layout.tsx
   - app/globals.css
-tests: []
+tests:
+  - features/common/**/*.test.ts
 depends_on: []
 ---
 
